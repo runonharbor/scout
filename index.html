@@ -10,7 +10,7 @@
 
   <meta
     name="description"
-    content="Scout is the simple home for your customers, opportunities, follow-ups, commissions, and everything in between."
+    content="Scout helps outside sales reps organize customers, opportunities, follow-ups, commissions, notes, and reports in one simple workspace."
   >
 
   <title>Scout — Find. Build. Grow.</title>
@@ -19,7 +19,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
   <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Inter:wght@400;500;600;700;800;900&display=swap"
     rel="stylesheet"
   >
 
@@ -32,24 +32,27 @@
     <div class="container header-inner">
 
       <a href="/" class="brand" aria-label="Scout homepage">
-
         <span class="brand-icon" aria-hidden="true">
-          <svg
-            viewBox="0 0 48 48"
-            role="img"
-            xmlns="http://www.w3.org/2000/svg"
-          >
+          <svg viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg">
             <circle
-              cx="24"
-              cy="24"
-              r="21"
+              cx="26"
+              cy="26"
+              r="23"
               fill="none"
               stroke="currentColor"
-              stroke-width="2"
+              stroke-width="2.1"
             />
 
             <path
-              d="M17 33C20 30 23 28 25 24C27 20 28 16 31 13"
+              d="M18 37C22 33 25 29 27 25C29 21 30 17 33 13"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.4"
+              stroke-linecap="round"
+            />
+
+            <path
+              d="M33 13V20"
               fill="none"
               stroke="currentColor"
               stroke-width="2.2"
@@ -57,27 +60,13 @@
             />
 
             <path
-              d="M30.5 13V20"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2.2"
-              stroke-linecap="round"
-            />
-
-            <path
-              d="M31 13L37 15.5L31 18"
-              fill="#d65a1f"
-              stroke="#d65a1f"
-              stroke-width="1"
+              d="M33 13L40 16L33 19"
+              fill="#db541b"
+              stroke="#db541b"
               stroke-linejoin="round"
             />
 
-            <circle
-              cx="17"
-              cy="33"
-              r="2"
-              fill="currentColor"
-            />
+            <circle cx="18" cy="37" r="2.3" fill="currentColor"/>
           </svg>
         </span>
 
@@ -91,14 +80,14 @@
         <a href="#early-access">Early access</a>
       </nav>
 
-      <a href="#early-access" class="button button-outline">
+      <a href="#early-access" class="button button-outline header-button">
         Request early access
       </a>
 
       <button
-        class="menu-toggle"
         type="button"
-        aria-label="Open navigation menu"
+        class="menu-toggle"
+        aria-label="Open navigation"
         aria-expanded="false"
       >
         <span></span>
@@ -124,14 +113,18 @@
         <div class="hero-copy">
 
           <h1>
-            Growing your territory is hard enough.
-            <span>Keeping everything organized shouldn’t be.</span>
+            Growing your territory<br>
+            is hard enough.
+            <span>
+              Keeping everything<br>
+              organized shouldn’t be.
+            </span>
           </h1>
 
           <p class="hero-description">
             Scout is the simple home for your customers, opportunities,
-            follow-ups, commissions, and everything in between. Less searching.
-            More selling.
+            follow-ups, commissions, and everything in between.
+            Less searching. More selling.
           </p>
 
           <div class="hero-actions">
@@ -139,39 +132,70 @@
               Request early access
             </a>
 
-            <a href="#story" class="text-link">
+            <a href="#story" class="story-link">
               Why we built Scout
               <span aria-hidden="true">→</span>
             </a>
           </div>
 
+          <div class="hero-benefits">
+
+            <article class="hero-benefit">
+              <span class="mini-icon">
+                <svg viewBox="0 0 40 40" aria-hidden="true">
+                  <circle cx="20" cy="20" r="17"></circle>
+                  <path d="M12 25L18 19L22 22L29 13"></path>
+                  <path d="M25 13H29V17"></path>
+                </svg>
+              </span>
+
+              <div>
+                <h3>Find the right accounts</h3>
+                <p>Everything in one place.</p>
+              </div>
+            </article>
+
+            <article class="hero-benefit">
+              <span class="mini-icon">
+                <svg viewBox="0 0 40 40" aria-hidden="true">
+                  <circle cx="20" cy="20" r="17"></circle>
+                  <path d="M11 26L17 20L21 23L28 14"></path>
+                  <path d="M11 29H29"></path>
+                </svg>
+              </span>
+
+              <div>
+                <h3>Build stronger relationships</h3>
+                <p>Know every interaction.</p>
+              </div>
+            </article>
+
+            <article class="hero-benefit">
+              <span class="mini-icon">
+                <svg viewBox="0 0 40 40" aria-hidden="true">
+                  <path d="M10 29V23H14V29"></path>
+                  <path d="M18 29V18H22V29"></path>
+                  <path d="M26 29V12H30V29"></path>
+                  <path d="M11 17L17 12L22 15L30 7"></path>
+                  <path d="M26 7H30V11"></path>
+                </svg>
+              </span>
+
+              <div>
+                <h3>Grow your business</h3>
+                <p>Win more, faster.</p>
+              </div>
+            </article>
+
+          </div>
         </div>
 
         <div class="hero-visual">
           <img
             src="images/scout-hero.png"
-            alt="Scout dashboard with follow-up notes, customer opportunities, and sales tasks"
+            alt="Illustration of a Scout sales workspace with a laptop, notebook, coffee cup, follow-up notes, and office desk"
           >
         </div>
-
-      </div>
-    </section>
-
-    <section class="intro-section" id="story">
-      <div class="container narrow-container">
-
-        <p class="eyebrow">Why we built Scout</p>
-
-        <h2>
-          Your territory should feel like a place you understand—not a pile of
-          disconnected notes, spreadsheets, and email threads.
-        </h2>
-
-        <p>
-          Scout was built to give outside salespeople one organized place to
-          manage the relationships, opportunities, follow-ups, and commissions
-          that keep a territory moving forward.
-        </p>
 
       </div>
     </section>
@@ -179,37 +203,99 @@
     <section class="features-section" id="features">
       <div class="container">
 
-        <div class="section-heading">
-          <p class="eyebrow">Everything in one place</p>
-          <h2>Know what happened, what matters, and what comes next.</h2>
+        <div class="section-heading centered-heading">
+          <p class="eyebrow">Built for outside sales</p>
+
+          <h2>
+            Everything you need.<br>
+            Nothing you don’t.
+          </h2>
+
+          <p>
+            Scout brings your territory, pipeline, and people together
+            in one simple, easy-to-use workspace.
+          </p>
         </div>
 
         <div class="features-grid">
 
           <article class="feature-card">
-            <span class="feature-number">01</span>
-            <h3>Accounts and contacts</h3>
+            <span class="feature-icon">
+              <svg viewBox="0 0 48 48" aria-hidden="true">
+                <circle cx="24" cy="15" r="7"></circle>
+                <path d="M12 39V34C12 28 17 24 24 24C31 24 36 28 36 34V39"></path>
+              </svg>
+            </span>
+
+            <h3>Accounts &amp; Contacts</h3>
+
             <p>
-              Keep customer information, notes, locations, and relationships
-              organized in one dependable place.
+              Keep every account and contact organized and up to date.
             </p>
           </article>
 
           <article class="feature-card">
-            <span class="feature-number">02</span>
+            <span class="feature-icon">
+              <svg viewBox="0 0 48 48" aria-hidden="true">
+                <circle cx="24" cy="24" r="17"></circle>
+                <path d="M24 14V34"></path>
+                <path d="M29 18C28 16 26 15 23 15C19 15 17 17 17 20C17 23 19 24 24 25C29 26 31 28 31 31C31 34 28 36 24 36C20 36 17 34 16 31"></path>
+              </svg>
+            </span>
+
             <h3>Opportunities</h3>
+
             <p>
-              See what is moving, what is stalled, and where your next sale may
-              come from.
+              Track your pipeline visually and move deals forward.
             </p>
           </article>
 
           <article class="feature-card">
-            <span class="feature-number">03</span>
-            <h3>Follow-ups</h3>
+            <span class="feature-icon">
+              <svg viewBox="0 0 48 48" aria-hidden="true">
+                <rect x="12" y="10" width="24" height="28" rx="3"></rect>
+                <path d="M18 24L22 28L30 19"></path>
+              </svg>
+            </span>
+
+            <h3>Activities &amp; Follow-ups</h3>
+
             <p>
-              Remember the next call, visit, quote, and commitment without
-              relying on scattered reminders.
+              Never forget a follow-up or miss an opportunity to connect.
+            </p>
+          </article>
+
+          <article class="feature-card">
+            <span class="feature-icon">
+              <svg viewBox="0 0 48 48" aria-hidden="true">
+                <path d="M14 8H30L36 14V40H14Z"></path>
+                <path d="M30 8V15H36"></path>
+                <path d="M20 22H30"></path>
+                <path d="M20 28H30"></path>
+                <path d="M20 34H27"></path>
+              </svg>
+            </span>
+
+            <h3>Notes &amp; History</h3>
+
+            <p>
+              All your conversations, notes, and files—right where you need them.
+            </p>
+          </article>
+
+          <article class="feature-card">
+            <span class="feature-icon">
+              <svg viewBox="0 0 48 48" aria-hidden="true">
+                <path d="M11 38V29H17V38"></path>
+                <path d="M21 38V21H27V38"></path>
+                <path d="M31 38V11H37V38"></path>
+              </svg>
+            </span>
+
+            <h3>Reports</h3>
+
+            <p>
+              Simple insights to help you focus on what drives results.
             </p>
           </article>
 
@@ -218,37 +304,137 @@
       </div>
     </section>
 
-    <section class="audience-section" id="who-its-for">
-      <div class="container audience-grid">
+    <section class="story-section" id="story">
+      <div class="container">
 
-        <div>
-          <p class="eyebrow">Who Scout is for</p>
-          <h2>Built for people responsible for growing a territory.</h2>
+        <div class="story-card">
+
+          <div class="story-quote">
+
+            <blockquote>
+              “We built Scout<br>
+              because we needed it<br>
+              for our
+              <span>own business.</span>”
+            </blockquote>
+
+            <div class="founder-row">
+
+              <img
+                src="images/jeff-short.jpg"
+                alt="Jeff Short, founder of Scout"
+                class="founder-photo"
+              >
+
+              <div>
+                <strong>Jeff Short</strong>
+                <span>Founder</span>
+              </div>
+
+              <svg
+                class="founder-arrow"
+                viewBox="0 0 120 60"
+                aria-hidden="true"
+              >
+                <path d="M112 8C100 43 68 51 22 38"></path>
+                <path d="M30 29L20 38L31 45"></path>
+              </svg>
+
+            </div>
+          </div>
+
+          <div class="story-copy">
+            <p>
+              As CSC grew, we were constantly searching for information,
+              digging through emails, and trying to keep track of everything
+              in spreadsheets.
+            </p>
+
+            <p>
+              We built Scout to solve those problems for ourselves.
+              Now we’re building it for other small teams who are tired
+              of software that’s too complicated.
+            </p>
+          </div>
+
         </div>
 
-        <div class="audience-list">
-          <div>
-            <h3>Outside sales reps</h3>
-            <p>
-              Keep every account, opportunity, and follow-up within reach.
-            </p>
-          </div>
+      </div>
+    </section>
 
-          <div>
-            <h3>Sales managers</h3>
-            <p>
-              Understand activity and pipeline without constantly chasing
-              updates.
-            </p>
-          </div>
+    <section class="audience-section" id="who-its-for">
+      <div class="container">
 
-          <div>
-            <h3>Small businesses</h3>
-            <p>
-              Replace complicated systems with something your team can actually
-              use.
-            </p>
-          </div>
+        <div class="section-heading centered-heading audience-heading">
+          <p class="eyebrow">Made for small teams</p>
+          <h2>Scout is for people who sell.</h2>
+        </div>
+
+        <div class="audience-grid">
+
+          <article class="audience-card">
+            <span class="audience-icon">
+              <svg viewBox="0 0 48 48" aria-hidden="true">
+                <circle cx="18" cy="16" r="5"></circle>
+                <circle cx="31" cy="18" r="4"></circle>
+                <circle cx="10" cy="19" r="4"></circle>
+                <path d="M10 38V33C10 27 13 23 18 23C23 23 27 27 27 33V38"></path>
+                <path d="M28 27C34 26 38 30 38 36V38"></path>
+                <path d="M9 27C5 28 4 31 4 36V38"></path>
+              </svg>
+            </span>
+
+            <div>
+              <h3>Outside sales reps</h3>
+              <p>
+                Manage your territory, pipeline, and follow-ups so you can
+                focus on building relationships.
+              </p>
+            </div>
+          </article>
+
+          <article class="audience-card">
+            <span class="audience-icon">
+              <svg viewBox="0 0 48 48" aria-hidden="true">
+                <rect x="9" y="15" width="30" height="22" rx="3"></rect>
+                <path d="M19 15V11H29V15"></path>
+                <path d="M9 24H39"></path>
+                <path d="M21 24V28H27V24"></path>
+              </svg>
+            </span>
+
+            <div>
+              <h3>Sales managers</h3>
+              <p>
+                Keep your team aligned, see what’s happening, and coach
+                with the right information.
+              </p>
+            </div>
+          </article>
+
+          <article class="audience-card">
+            <span class="audience-icon">
+              <svg viewBox="0 0 48 48" aria-hidden="true">
+                <path d="M8 39V19H20V39"></path>
+                <path d="M20 39V10H34V39"></path>
+                <path d="M34 39V24H41V39"></path>
+                <path d="M13 24H16"></path>
+                <path d="M13 29H16"></path>
+                <path d="M25 16H29"></path>
+                <path d="M25 22H29"></path>
+                <path d="M25 28H29"></path>
+              </svg>
+            </span>
+
+            <div>
+              <h3>Small businesses</h3>
+              <p>
+                Get a powerful sales system without the complexity,
+                cost, or long implementation.
+              </p>
+            </div>
+          </article>
+
         </div>
 
       </div>
@@ -259,30 +445,46 @@
 
         <div class="early-access-card">
 
-          <div>
-            <p class="eyebrow">We’re early</p>
-            <h2>Help us build a better home for your territory.</h2>
+          <div class="early-access-copy">
+            <h2>
+              We’re early.<br>
+              You can help shape what’s next.
+            </h2>
 
             <p>
-              Tell us a little about how you currently manage customers,
-              opportunities, follow-ups, and commissions.
+              Scout is currently in early access. Join the list to get
+              early access and help shape the future of Scout.
             </p>
           </div>
 
-          <form class="early-access-form">
-            <label class="sr-only" for="email">Email address</label>
+          <form
+            class="early-access-form"
+            action="#"
+            method="post"
+          >
+            <div class="form-row">
+              <label class="sr-only" for="email">
+                Work email
+              </label>
 
-            <input
-              id="email"
-              name="email"
-              type="email"
-              placeholder="you@company.com"
-              required
-            >
+              <input
+                id="email"
+                name="email"
+                type="email"
+                placeholder="Your work email"
+                autocomplete="email"
+                required
+              >
 
-            <button class="button button-primary" type="submit">
-              Request early access
-            </button>
+              <button type="submit" class="button button-primary">
+                Request early access
+              </button>
+            </div>
+
+            <p class="form-note">
+              <span aria-hidden="true">✓</span>
+              No spam. Just early access updates.
+            </p>
           </form>
 
         </div>
@@ -293,15 +495,64 @@
   </main>
 
   <footer class="site-footer">
-    <div class="container footer-inner">
+    <div class="container footer-grid">
 
-      <a href="/" class="brand footer-brand">
-        <span class="brand-name">Scout</span>
-      </a>
+      <div class="footer-brand-column">
+        <a href="/" class="brand footer-brand">
+          <span class="brand-icon" aria-hidden="true">
+            <svg viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg">
+              <circle
+                cx="26"
+                cy="26"
+                r="23"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.1"
+              />
 
-      <p>Find. Build. Grow.</p>
+              <path
+                d="M18 37C22 33 25 29 27 25C29 21 30 17 33 13"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.4"
+                stroke-linecap="round"
+              />
 
-      <p>© 2026 Scout</p>
+              <path
+                d="M33 13L40 16L33 19"
+                fill="#db541b"
+                stroke="#db541b"
+              />
+            </svg>
+          </span>
+
+          <span class="brand-name">Scout</span>
+        </a>
+
+        <p>
+          Find. Build. <span>Grow.</span>
+        </p>
+      </div>
+
+      <div class="footer-column">
+        <h3>Product</h3>
+        <a href="#features">Features</a>
+        <a href="#early-access">Early access</a>
+      </div>
+
+      <div class="footer-column">
+        <h3>Company</h3>
+        <a href="#story">Why we built Scout</a>
+        <a href="#story">Our story</a>
+      </div>
+
+      <div class="footer-column">
+        <h3>Legal</h3>
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+      </div>
+
+     
 
     </div>
   </footer>
@@ -311,10 +562,22 @@
     const mobileNav = document.querySelector(".mobile-nav");
 
     menuToggle.addEventListener("click", () => {
-      const isOpen = menuToggle.getAttribute("aria-expanded") === "true";
+      const isOpen =
+        menuToggle.getAttribute("aria-expanded") === "true";
 
-      menuToggle.setAttribute("aria-expanded", String(!isOpen));
+      menuToggle.setAttribute(
+        "aria-expanded",
+        String(!isOpen)
+      );
+
       mobileNav.classList.toggle("is-open");
+    });
+
+    mobileNav.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        mobileNav.classList.remove("is-open");
+        menuToggle.setAttribute("aria-expanded", "false");
+      });
     });
   </script>
 
