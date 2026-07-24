@@ -1136,6 +1136,322 @@
         grid-column: auto;
       }
     }
+
+    /* =========================================================
+   WHY SCOUT PAGE
+   ========================================================= */
+
+.site-header {
+  position: relative;
+  z-index: 20;
+  padding: 22px 0;
+}
+
+.nav {
+  width: min(calc(100% - 40px), var(--container));
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  color: var(--scout-green);
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: -0.045em;
+  text-decoration: none;
+}
+
+.page {
+  width: min(calc(100% - 40px), 860px);
+  margin: 0 auto;
+  padding: 58px 0 100px;
+}
+
+.letter {
+  position: relative;
+  padding: 72px 68px;
+  overflow: hidden;
+  border: 1px solid var(--stone);
+  border-radius: var(--radius-lg);
+  background: var(--white);
+  box-shadow: var(--shadow-soft);
+}
+
+.letter::before {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 6px;
+  background: var(--scout-orange);
+  content: "";
+}
+
+.letter h1 {
+  max-width: 720px;
+  margin: 0 0 34px;
+  color: var(--charcoal);
+  font-size: clamp(2.8rem, 7vw, 5rem);
+  font-weight: 800;
+  line-height: 0.98;
+  letter-spacing: -0.055em;
+}
+
+.letter p {
+  margin: 0 0 27px;
+  color: #42474a;
+  font-size: 1.15rem;
+  line-height: 1.85;
+}
+
+.letter .lead {
+  margin-bottom: 38px;
+  color: var(--charcoal);
+  font-size: 1.4rem;
+  font-weight: 500;
+  line-height: 1.65;
+}
+
+.highlight {
+  padding: 0 3px 2px;
+  color: var(--charcoal);
+  font-weight: 750;
+  background:
+    linear-gradient(
+      transparent 55%,
+      rgba(214, 90, 31, 0.2) 55%
+    );
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+.signature-image {
+  display: block;
+  width: 175px;
+  height: auto;
+  margin: 42px 0 8px;
+  opacity: 0.88;
+}
+
+.signature-text {
+  margin-top: 8px;
+  color: var(--charcoal);
+  font-size: 1.05rem;
+  line-height: 1.45;
+}
+
+.signature-name {
+  margin-top: 4px;
+  color: var(--graphite);
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.letter-cta {
+  margin-top: 40px;
+  padding: 58px 50px;
+  border: 1px solid var(--stone);
+  border-radius: var(--radius-lg);
+  background:
+    radial-gradient(
+      circle at 10% 10%,
+      rgba(214, 90, 31, 0.06),
+      transparent 32%
+    ),
+    var(--sand);
+  text-align: center;
+}
+
+.letter-cta h2 {
+  max-width: 680px;
+  margin: 0 auto 18px;
+  color: var(--charcoal);
+  font-size: clamp(2rem, 5vw, 3.25rem);
+  font-weight: 800;
+  line-height: 1.06;
+  letter-spacing: -0.045em;
+}
+
+.letter-cta > p {
+  max-width: 620px;
+  margin: 0 auto 28px;
+  color: var(--graphite);
+  font-size: 1.05rem;
+  line-height: 1.75;
+}
+
+.letter-button {
+  display: inline-flex;
+  min-height: 50px;
+  align-items: center;
+  justify-content: center;
+  padding: 0 24px;
+  border: 1px solid var(--scout-orange);
+  border-radius: 9px;
+  background: var(--scout-orange);
+  color: var(--white);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    transform 160ms ease,
+    background-color 160ms ease,
+    border-color 160ms ease;
+}
+
+.letter-button:hover {
+  border-color: var(--scout-orange-dark);
+  background: var(--scout-orange-dark);
+  transform: translateY(-1px);
+}
+
+.harbor-form-box,
+.scout-form-box {
+  display: none;
+  margin-top: 36px;
+  text-align: left;
+}
+
+.form-card {
+  padding: 30px;
+  border: 1px solid var(--stone);
+  border-radius: var(--radius-md);
+  background: var(--white);
+  box-shadow: var(--shadow-soft);
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.form-grid .full {
+  grid-column: 1 / -1;
+}
+
+.form-card label {
+  display: block;
+  margin: 0 0 8px;
+  color: var(--charcoal);
+  font-size: 0.83rem;
+  font-weight: 800;
+}
+
+.form-card input,
+.form-card select,
+.form-card textarea {
+  width: 100%;
+  min-width: 0;
+  height: 50px;
+  padding: 12px 14px;
+  border: 1px solid #d6d4cf;
+  border-radius: 8px;
+  background: var(--white);
+  color: var(--charcoal);
+  font: inherit;
+  outline: none;
+}
+
+.form-card textarea {
+  min-height: 140px;
+  height: auto;
+  line-height: 1.55;
+  resize: vertical;
+}
+
+.form-card input:focus,
+.form-card select:focus,
+.form-card textarea:focus {
+  border-color: var(--scout-orange);
+  box-shadow: 0 0 0 3px rgba(214, 90, 31, 0.11);
+}
+
+.form-actions {
+  display: grid;
+  gap: 12px;
+  margin-top: 22px;
+}
+
+.form-actions button {
+  width: 100%;
+  min-height: 52px;
+  border: 1px solid var(--scout-orange);
+  border-radius: 9px;
+  background: var(--scout-orange);
+  color: var(--white);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.form-actions button:hover {
+  border-color: var(--scout-orange-dark);
+  background: var(--scout-orange-dark);
+}
+
+.form-actions .form-note {
+  display: block;
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.78rem;
+  text-align: center;
+}
+
+@media (max-width: 760px) {
+  .nav {
+    width: min(calc(100% - 28px), var(--container));
+  }
+
+  .brand {
+    font-size: 1.65rem;
+  }
+
+  .page {
+    width: min(calc(100% - 28px), 860px);
+    padding: 34px 0 64px;
+  }
+
+  .letter {
+    padding: 48px 27px;
+    border-radius: var(--radius-md);
+  }
+
+  .letter h1 {
+    font-size: clamp(2.65rem, 12vw, 4rem);
+  }
+
+  .letter p {
+    font-size: 1.05rem;
+    line-height: 1.75;
+  }
+
+  .letter .lead {
+    font-size: 1.2rem;
+  }
+
+  .letter-cta {
+    margin-top: 28px;
+    padding: 44px 24px;
+    border-radius: var(--radius-md);
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-grid .full {
+    grid-column: auto;
+  }
+
+  .form-card {
+    padding: 22px 18px;
+  }
+}
   </style>
 
 </head>
