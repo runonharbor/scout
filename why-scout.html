@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Why We Built Harbor | A Letter From Our Founder</title>
+<meta name="description" content="A personal note from Harbor's founder on why Harbor was built to help growing businesses keep customers, suppliers, orders, assets, and workflows organized.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;650;750;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f6f5f0;
+    --paper:#ffffff;
+    --text:#17213a;
+    --muted:#657083;
+    --border:#dfe3dc;
+
+    --scout-green:#315f4d;
+    --scout-green-dark:#244839;
+    --scout-green-light:#e6eee9;
+
+    --highlight:#f3df78;
+    --shadow:0 24px 70px rgba(23,33,58,.09);
+  }
+
+  *{
+    box-sizing:border-box;
+  }
+
+  html{
+    scroll-behavior:smooth;
+  }
+
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  .site-header{
+    width:100%;
+    background:rgba(246,245,240,.94);
+    border-bottom:1px solid rgba(23,33,58,.08);
+    position:sticky;
+    top:0;
+    z-index:20;
+    backdrop-filter:blur(12px);
+  }
+
+  .nav{
+    width:min(1180px,calc(100% - 48px));
+    margin:0 auto;
+    min-height:76px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:24px;
+  }
+
+  .brand{
+    display:inline-flex;
+    align-items:center;
+    color:var(--text);
+    font-size:29px;
+    font-weight:800;
+    letter-spacing:-.055em;
+    line-height:1;
+    text-decoration:none;
+  }
+
+  .brand::after{
+    content:".";
+    color:var(--scout-green);
+  }
+
+  .page{
+    width:min(900px,calc(100% - 40px));
+    margin:0 auto;
+    padding:72px 0 100px;
+  }
+
+  .letter{
+    position:relative;
+    overflow:hidden;
+    background:var(--paper);
+    padding:76px 72px;
+    border:1px solid rgba(23,33,58,.08);
+    border-radius:22px;
+    box-shadow:var(--shadow);
+  }
+
+  .letter::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:7px;
+    background:var(--scout-green);
+  }
+
+  .eyebrow{
+    margin:0 0 22px;
+    color:var(--scout-green);
+    font-size:13px;
+    font-weight:800;
+    letter-spacing:.14em;
+    line-height:1.4;
+    text-transform:uppercase;
+  }
+
+  h1{
+    max-width:720px;
+    margin:0 0 34px;
+    color:var(--text);
+    font-size:clamp(46px,7vw,76px);
+    font-weight:800;
+    letter-spacing:-.055em;
+    line-height:.98;
+  }
+
+  p{
+    margin:0 0 27px;
+    color:#344056;
+    font-size:19px;
+    line-height:1.82;
+  }
+
+  .lead{
+    max-width:720px;
+    margin-bottom:40px;
+    color:var(--text);
+    font-size:24px;
+    font-weight:500;
+    letter-spacing:-.018em;
+    line-height:1.58;
+  }
+
+  .highlight{
+    display:inline;
+    padding:0 3px 2px;
+    color:var(--text);
+    font-weight:750;
+    background:
+      linear-gradient(
+        transparent 58%,
+        rgba(243,223,120,.88) 58%
+      );
+    box-decoration-break:clone;
+    -webkit-box-decoration-break:clone;
+  }
+
+  .quote-block{
+    max-width:760px;
+    margin:38px 0;
+    padding:20px 24px;
+    background:var(--scout-green-light);
+    border-left:5px solid var(--scout-green);
+    border-radius:0 12px 12px 0;
+  }
+
+  .signature-image{
+    display:block;
+    width:170px;
+    max-width:100%;
+    height:auto;
+    margin:42px 0 8px;
+    opacity:.88;
+  }
+
+  .signature-text{
+    margin-top:8px;
+    color:var(--text);
+    font-size:18px;
+    line-height:1.45;
+  }
+
+  .signature-name{
+    margin-top:4px;
+    color:var(--muted);
+    font-size:14px;
+    font-weight:700;
+  }
+
+  .letter-cta{
+    margin-top:44px;
+    padding:64px 48px;
+    text-align:center;
+    background:var(--text);
+    border-radius:22px;
+    box-shadow:0 20px 50px rgba(23,33,58,.14);
+  }
+
+  .letter-cta h2{
+    max-width:680px;
+    margin:0 auto 18px;
+    color:#ffffff;
+    font-size:clamp(34px,5vw,52px);
+    font-weight:800;
+    letter-spacing:-.045em;
+    line-height:1.05;
+  }
+
+  .letter-cta > p{
+    max-width:620px;
+    margin:0 auto 30px;
+    color:rgba(255,255,255,.72);
+    font-size:18px;
+    line-height:1.7;
+  }
+
+  .letter-button{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    min-height:52px;
+    padding:14px 24px;
+    color:#ffffff;
+    background:var(--scout-green);
+    border:2px solid var(--scout-green);
+    border-radius:10px;
+    font:inherit;
+    font-size:16px;
+    font-weight:800;
+    cursor:pointer;
+    transition:
+      background .2s ease,
+      border-color .2s ease,
+      transform .2s ease,
+      box-shadow .2s ease;
+  }
+
+  .letter-button:hover{
+    background:var(--scout-green-dark);
+    border-color:var(--scout-green-dark);
+    box-shadow:0 10px 24px rgba(0,0,0,.18);
+    transform:translateY(-2px);
+  }
+
+  .letter-button:focus-visible{
+    outline:3px solid rgba(243,223,120,.9);
+    outline-offset:4px;
+  }
+
+  /*
+    This targets both the old Harbor class and a future
+    Scout class, so the HTML does not have to be changed yet.
+  */
+  .harbor-form-box,
+  .scout-form-box{
+    display:none;
+    margin-top:36px;
+    text-align:left;
+  }
+
+  .form-card{
+    padding:30px;
+    background:#ffffff;
+    border:1px solid rgba(23,33,58,.12);
+    border-radius:16px;
+    box-shadow:0 16px 40px rgba(0,0,0,.12);
+  }
+
+  .form-grid{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:20px;
+  }
+
+  .form-grid .full{
+    grid-column:1 / -1;
+  }
+
+  .form-card label{
+    display:block;
+    margin:0 0 8px;
+    color:var(--text);
+    font-size:13px;
+    font-weight:800;
+    letter-spacing:.01em;
+  }
+
+  .form-card input,
+  .form-card select,
+  .form-card textarea{
+    width:100%;
+    min-width:0;
+    height:50px;
+    padding:12px 14px;
+    color:var(--text);
+    background:#ffffff;
+    border:1px solid #cfd5ce;
+    border-radius:9px;
+    outline:none;
+    font:inherit;
+    font-size:15px;
+    transition:
+      border-color .2s ease,
+      box-shadow .2s ease,
+      background .2s ease;
+  }
+
+  .form-card textarea{
+    min-height:140px;
+    height:auto;
+    line-height:1.55;
+    resize:vertical;
+  }
+
+  .form-card input::placeholder,
+  .form-card textarea::placeholder{
+    color:#929aaa;
+  }
+
+  .form-card input:focus,
+  .form-card select:focus,
+  .form-card textarea:focus{
+    background:#ffffff;
+    border-color:var(--scout-green);
+    box-shadow:0 0 0 4px rgba(49,95,77,.12);
+  }
+
+  .form-actions{
+    display:grid;
+    gap:12px;
+    margin-top:22px;
+  }
+
+  .form-actions button{
+    width:100%;
+    min-height:54px;
+    padding:14px 22px;
+    color:#ffffff;
+    background:var(--scout-green);
+    border:2px solid var(--scout-green);
+    border-radius:10px;
+    font:inherit;
+    font-size:16px;
+    font-weight:800;
+    cursor:pointer;
+    transition:
+      background .2s ease,
+      border-color .2s ease,
+      transform .2s ease;
+  }
+
+  .form-actions button:hover{
+    background:var(--scout-green-dark);
+    border-color:var(--scout-green-dark);
+    transform:translateY(-1px);
+  }
+
+  .form-note{
+    display:block;
+    color:var(--muted);
+    font-size:13px;
+    line-height:1.5;
+    text-align:center;
+  }
+
+  @media(max-width:760px){
+    .nav{
+      width:min(100% - 32px,1180px);
+      min-height:68px;
+    }
+
+    .brand{
+      font-size:26px;
+    }
+
+    .page{
+      width:min(100% - 28px,900px);
+      padding:36px 0 64px;
+    }
+
+    .letter{
+      padding:50px 28px;
+      border-radius:16px;
+    }
+
+    h1{
+      font-size:clamp(42px,13vw,60px);
+    }
+
+    p{
+      font-size:17px;
+      line-height:1.75;
+    }
+
+    .lead{
+      font-size:21px;
+      line-height:1.6;
+    }
+
+    .letter-cta{
+      margin-top:28px;
+      padding:48px 24px;
+      border-radius:16px;
+    }
+
+    .letter-cta > p{
+      font-size:17px;
+    }
+
+    .form-grid{
+      grid-template-columns:1fr;
+    }
+
+    .form-grid .full{
+      grid-column:auto;
+    }
+
+    .form-card{
+      padding:22px 18px;
+    }
+  }
+
+  @media(max-width:420px){
+    .letter{
+      padding:44px 22px;
+    }
+
+    .letter-cta{
+      padding:42px 20px;
+    }
+  }
+</style>
+
+
+</head>
+
+<body>
+<header class="site-header">
+    <nav class="nav">
+      <a class="brand" href="https://runonharbor.com">Harbor</a>
+
+    </nav>
+</header>
+<main class="page">
+  <article class="letter">
+
+    <h1>Built while building a business.</h1>
+
+    <p class="lead">
+      Harbor started because we were struggling to keep up with the growth of our own business.
+    </p>
+    <p>
+      As CSC grew, we found ourselves spending more and more time managing information instead of serving customers.
+    </p>
+
+    <p>
+      Every order created a trail of emails, phone calls, supplier conversations, quotes, tracking numbers, notes, and follow-up tasks. A customer would contact us looking for a specific part, and we would immediately begin reaching out to multiple suppliers to compare pricing and availability.
+    </p>
+
+    <p>
+      In other cases, we would sell a product and then start coordinating with suppliers to fulfill the order and ensure it shipped on time.
+    </p>
+
+    <p>
+      The work itself wasn’t the problem.
+    </p>
+
+    <p>
+      The problem was everything surrounding the work.
+    </p>
+
+    <p>
+      <span class="highlight">Before long, it felt like we were trying to play a clean game of telephone — digitally.</span>
+    </p>
+
+    <p>
+      Information was constantly being passed from customer to supplier, supplier to employee, employee to spreadsheet, spreadsheet to email, and back again. Every handoff created another opportunity for something to be missed, delayed, or forgotten.
+    </p>
+
+    <p>
+      It wasn’t that the information didn’t exist.
+    </p>
+
+    <p>
+      <span class="highlight">It was that the information lived everywhere.</span>
+    </p>
+
+    <p>
+      Some of it was in our inboxes. Some of it was in spreadsheets. Some of it was in notes. Some of it was in supplier portals. Some of it lived only in somebody’s memory.
+    </p>
+
+    <p>
+      As the business grew, keeping everyone aligned became exhausting.
+    </p>
+
+    <p>
+      We were constantly switching between systems trying to answer what should have been simple questions.
+    </p>
+
+    <p>
+      What did we quote? Who is waiting on a response? Which supplier has the best availability? Did the order ship? Did someone follow up with the customer?
+    </p>
+
+    <p>
+      What started as a manageable process slowly became harder and harder to maintain.
+    </p>
+
+    <p>
+      And the reality is, we don’t think we’re alone.
+    </p>
+
+    <p>
+      Most growing businesses aren’t struggling because they lack effort. They’re struggling because information becomes fragmented as they grow.
+    </p>
+
+    <p>
+      Every new customer, supplier, project, asset, document, and workflow introduces another place where information can get lost.
+    </p>
+
+    <p>
+      Eventually, you spend more time searching for information than acting on it.
+    </p>
+
+    <p>
+      That’s the moment Harbor was born.
+    </p>
+
+    <p>
+      We started building a system for ourselves. A place where customers, suppliers, orders, assets, documents, requests, projects, and conversations could finally live together.
+    </p>
+
+    <p>
+      A place where information remained connected. A place where everyone could see what was happening without digging through inboxes, spreadsheets, and disconnected systems.
+    </p>
+
+    <p>
+      We didn’t build Harbor because we wanted another piece of software.
+    </p>
+
+    <p>
+      We built Harbor because we wanted less software.
+    </p>
+
+    <p>
+      Less jumping between tabs. Less duplicate data entry. Less searching. Less confusion. Less time spent trying to remember where something lives.
+    </p>
+
+    <p>
+      The name Harbor came naturally.
+    </p>
+
+    <p>
+      A harbor is a place where things come together. A place of protection. A place of organization. A place that helps you stay on course when things around you become busy and unpredictable.
+    </p>
+
+    <p>
+      That’s what we wanted Harbor to become for growing businesses.
+    </p>
+
+    <p>
+      Today, Harbor is still guided by that same idea.
+    </p>
+
+    <p>
+      We’re building the platform we wish we had while scaling CSC.
+    </p>
+
+    <p>
+      A place where information has a home. A place where teams stay aligned. A place where businesses can focus less on managing information and more on serving customers.
+    </p>
+
+    <p>
+      Because growing a business is hard enough.
+    </p>
+
+    <p>
+      Keeping it organized shouldn’t be.
+    </p>
+ <img
+  src="jssignature.png"
+  alt="Jeff Short Signature"
+  class="signature-image"
+>
+    <div class="signature-text">
+      Jeff Short
+      <div class="signature-name">Founder, Harbor</div>
+    </div>
+
+  </article>
+  <section class="letter-cta">
+  <h2>Does any of this sound familiar?</h2>
+
+  <p>
+   We built Harbor to solve challenges we were experiencing ourselves. If you're facing something similar, I'd love to hear your story.
+  </p>
+
+  <button type="button" class="letter-button" onclick="toggleHarborForm()">
+    Share Your Story
+  </button>
+
+  <div id="harbor-form-box" class="harbor-form-box">
+    <form
+      class="form-card"
+      action="https://formspree.io/f/xdarogbw"
+      method="POST"
+      id="harbor-form"
+    >
+      <input type="hidden" name="_subject" value="New Harbor Early Access Request">
+      <input type="hidden" name="_next" value="https://runonharbor.com/thank-you.html">
+      <input type="text" name="_gotcha" style="display:none">
+
+      <div class="form-grid">
+        <div>
+          <label for="name">Name</label>
+          <input id="name" name="name" type="text" autocomplete="name" required>
+        </div>
+
+        <div>
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" autocomplete="email" required>
+        </div>
+
+        <div>
+          <label for="company">Company</label>
+          <input id="company" name="company" type="text" autocomplete="organization">
+        </div>
+
+        <div>
+          <label for="business_type">Business type</label>
+          <select id="business_type" name="business_type" required>
+            <option value="" selected disabled>Select one</option>
+            <option value="Industrial Distributor">Industrial Distributor</option>
+            <option value="Manufacturer">Manufacturer</option>
+            <option value="Parts Supplier">Parts Supplier</option>
+            <option value="Service Company">Service Company</option>
+            <option value="Contractor / Fleet">Contractor / Fleet</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="company_size">Company size</label>
+          <select id="company_size" name="company_size">
+            <option value="" selected disabled>Select one</option>
+            <option value="1-10 employees">1-10 employees</option>
+            <option value="11-50 employees">11-50 employees</option>
+            <option value="51-250 employees">51-250 employees</option>
+            <option value="250+ employees">250+ employees</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="interest">What are you most interested in?</label>
+          <select id="interest" name="interest" required>
+            <option value="" selected disabled>Select one</option>
+            <option value="Customer Portal">Customer Portal</option>
+            <option value="Quote Management">Quote Management</option>
+            <option value="Asset Management">Asset Management</option>
+            <option value="Order Tracking">Order Tracking</option>
+            <option value="Supplier Workflows">Supplier Workflows</option>
+            <option value="Internal Operations">Internal Operations</option>
+            <option value="Not Sure Yet">Not Sure Yet</option>
+          </select>
+        </div>
+
+        <div class="full">
+          <label for="message">What are you trying to improve?</label>
+          <textarea id="message" name="message" placeholder="Example: We’re tracking quotes in email and spreadsheets and need a better way to manage follow-up."></textarea>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button type="submit">Start the Conversation</button>
+        <span class="form-note">We’ll review your information you provided and follow up with you directly.</span>
+      </div>
+    </form>
+  </div>
+</section>
+</main>
+<script>
+function toggleHarborForm(){
+  const box = document.getElementById('harbor-form-box');
+
+  if(box.style.display === 'block'){
+    box.style.display = 'none';
+  } else {
+    box.style.display = 'block';
+    box.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+}
+</script>
+</body>
+</html>
