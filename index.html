@@ -252,12 +252,23 @@
       padding: 62px 0 90px;
     }
 
-    .hero-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 0.9fr) minmax(480px, 1.1fr);
-      align-items: center;
-      gap: 58px;
-    }
+   .hero-grid{
+    display:grid;
+    grid-template-columns: 70% 30%;
+    gap:4rem;
+    align-items:center;
+}
+    .hero-visual{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.hero-visual img{
+    width:100%;
+    max-width:420px;   /* was probably 600-700px */
+    height:auto;
+}
 
     .hero-copy h1 {
       max-width: 690px;
