@@ -1,0 +1,1963 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Scout — Find. Build. Grow.</title>
+
+  <meta
+    name="description"
+    content="Scout helps outside sales reps organize customers, opportunities, follow-ups, commissions, and territory activity in one simple workspace."
+  />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    :root {
+      --scout-green: #1f4d3f;
+      --pine-green: #2f6b53;
+      --scout-orange: #d65a1f;
+      --scout-orange-dark: #bd4814;
+
+      --sand: #f7f5f0;
+      --warm-white: #fcfbf8;
+      --white: #ffffff;
+      --stone: #e2dfda;
+
+      --charcoal: #1f1f21;
+      --graphite: #5c6168;
+      --muted: #767a7e;
+
+      --success: #2e7d5a;
+
+      --radius-sm: 10px;
+      --radius-md: 18px;
+      --radius-lg: 28px;
+
+      --shadow-soft:
+        0 18px 50px rgba(31, 31, 33, 0.06),
+        0 2px 10px rgba(31, 31, 33, 0.04);
+
+      --container: 1180px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background:
+        radial-gradient(
+          circle at 80% 5%,
+          rgba(214, 90, 31, 0.04),
+          transparent 26%
+        ),
+        var(--warm-white);
+      color: var(--charcoal);
+      font-family: "Inter", Arial, sans-serif;
+      line-height: 1.6;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    .container {
+      width: min(calc(100% - 40px), var(--container));
+      margin: 0 auto;
+    }
+
+    .section {
+      padding: 92px 0;
+    }
+
+    .eyebrow {
+      margin: 0 0 12px;
+      color: var(--scout-orange);
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .section-heading {
+      max-width: 720px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .section-heading h2 {
+      margin: 0;
+      font-size: clamp(2rem, 4vw, 3.35rem);
+      line-height: 1.08;
+      letter-spacing: -0.045em;
+    }
+
+    .section-heading p {
+      max-width: 650px;
+      margin: 22px auto 0;
+      color: var(--graphite);
+      font-size: 1.05rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      min-height: 50px;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      padding: 0 22px;
+      border: 1px solid transparent;
+      border-radius: 9px;
+      cursor: pointer;
+      font-weight: 700;
+      transition:
+        transform 160ms ease,
+        background-color 160ms ease,
+        border-color 160ms ease,
+        color 160ms ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .btn-primary {
+      background: var(--scout-orange);
+      color: var(--white);
+    }
+
+    .btn-primary:hover {
+      background: var(--scout-orange-dark);
+    }
+
+    .btn-secondary {
+      border-color: var(--scout-orange);
+      background: transparent;
+      color: var(--scout-orange);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(214, 90, 31, 0.06);
+    }
+
+    .text-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--scout-green);
+      font-weight: 700;
+    }
+
+    .text-link:hover {
+      color: var(--scout-orange);
+    }
+
+    /* Header */
+
+    .site-header {
+      position: relative;
+      z-index: 20;
+      padding: 22px 0;
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 28px;
+    }
+
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
+      font-size: 2rem;
+      font-weight: 800;
+      letter-spacing: -0.045em;
+      color: var(--scout-green);
+    }
+
+    .logo-mark {
+      position: relative;
+      display: inline-flex;
+      width: 44px;
+      height: 44px;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid var(--scout-green);
+      border-radius: 50%;
+    }
+
+    .logo-mark svg {
+      width: 31px;
+      height: 31px;
+    }
+
+    .main-nav {
+      display: flex;
+      align-items: center;
+      gap: 34px;
+      color: #34373a;
+      font-size: 0.94rem;
+      font-weight: 600;
+    }
+
+    .main-nav a {
+      transition: color 150ms ease;
+    }
+
+    .main-nav a:hover {
+      color: var(--scout-orange);
+    }
+
+    .mobile-menu-button {
+      display: none;
+      width: 44px;
+      height: 44px;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--stone);
+      border-radius: 9px;
+      background: var(--white);
+      cursor: pointer;
+    }
+
+    /* Hero */
+
+    .hero {
+      padding: 62px 0 90px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 0.9fr) minmax(480px, 1.1fr);
+      align-items: center;
+      gap: 58px;
+    }
+
+    .hero-copy h1 {
+      max-width: 690px;
+      margin: 0;
+      font-size: clamp(3rem, 5.8vw, 5.75rem);
+      line-height: 0.99;
+      letter-spacing: -0.065em;
+    }
+
+    .hero-copy h1 span {
+      display: block;
+      color: var(--scout-orange);
+    }
+
+    .hero-copy > p {
+      max-width: 590px;
+      margin: 28px 0 0;
+      color: var(--graphite);
+      font-size: 1.12rem;
+      line-height: 1.75;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      margin-top: 34px;
+    }
+
+    .hero-points {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-top: 56px;
+    }
+
+    .hero-point {
+      display: grid;
+      grid-template-columns: 39px 1fr;
+      gap: 12px;
+      align-items: start;
+    }
+
+    .hero-point-icon {
+      display: inline-flex;
+      width: 38px;
+      height: 38px;
+      align-items: center;
+      justify-content: center;
+      border: 1.5px solid var(--scout-green);
+      border-radius: 50%;
+      color: var(--scout-green);
+    }
+
+    .hero-point h3 {
+      margin: 0;
+      font-size: 0.92rem;
+      line-height: 1.35;
+    }
+
+    .hero-point p {
+      margin: 5px 0 0;
+      color: var(--muted);
+      font-size: 0.8rem;
+      line-height: 1.5;
+    }
+
+    .hero-visual {
+      position: relative;
+      min-height: 590px;
+    }
+
+    .sketch-card {
+      position: relative;
+      overflow: hidden;
+      min-height: 560px;
+      border-radius: 32px;
+      background:
+        linear-gradient(rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)),
+        repeating-linear-gradient(
+          0deg,
+          transparent 0,
+          transparent 27px,
+          rgba(31, 77, 63, 0.035) 28px
+        ),
+        #f8f5ec;
+    }
+
+    .sketch-card::before {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(
+          circle at 50% 42%,
+          rgba(255, 255, 255, 0.92),
+          transparent 48%
+        );
+      content: "";
+    }
+
+    .mountain-lines {
+      position: absolute;
+      top: 42px;
+      left: 50%;
+      width: 72%;
+      transform: translateX(-50%);
+      opacity: 0.38;
+    }
+
+    .monitor {
+      position: absolute;
+      top: 160px;
+      left: 50%;
+      z-index: 2;
+      width: 58%;
+      min-width: 340px;
+      transform: translateX(-50%) rotate(1deg);
+      border: 3px solid #313638;
+      border-radius: 12px;
+      background: #fefefe;
+      box-shadow: 0 18px 32px rgba(31, 31, 33, 0.12);
+    }
+
+    .monitor-top {
+      height: 22px;
+      border-bottom: 2px solid #555;
+      background: #eeeeea;
+    }
+
+    .monitor-screen {
+      display: grid;
+      grid-template-columns: 31% 1fr;
+      min-height: 220px;
+    }
+
+    .monitor-sidebar {
+      border-right: 1px solid #d6d6d1;
+      padding: 17px 13px;
+      background: #f5f4f0;
+    }
+
+    .screen-logo {
+      margin-bottom: 14px;
+      font-size: 0.7rem;
+      font-weight: 800;
+    }
+
+    .screen-line {
+      height: 8px;
+      margin: 10px 0;
+      border-radius: 20px;
+      background: #d6d8d5;
+    }
+
+    .screen-line.short {
+      width: 64%;
+    }
+
+    .monitor-content {
+      padding: 18px;
+    }
+
+    .monitor-title {
+      width: 40%;
+      height: 14px;
+      margin-bottom: 20px;
+      border-radius: 12px;
+      background: #353a3a;
+    }
+
+    .mini-card {
+      display: grid;
+      grid-template-columns: 1fr 46px;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+      padding: 10px 12px;
+      border: 1px solid #dcddd9;
+      border-radius: 8px;
+    }
+
+    .mini-card-line {
+      height: 7px;
+      border-radius: 12px;
+      background: #d8dad6;
+    }
+
+    .mini-card-dot {
+      width: 14px;
+      height: 14px;
+      justify-self: end;
+      border: 3px solid var(--scout-orange);
+      border-radius: 50%;
+    }
+
+    .desk-line {
+      position: absolute;
+      right: 6%;
+      bottom: 112px;
+      left: 6%;
+      height: 3px;
+      background: rgba(42, 47, 47, 0.45);
+      transform: rotate(-1deg);
+    }
+
+    .notebook {
+      position: absolute;
+      right: 10%;
+      bottom: 47px;
+      z-index: 3;
+      width: 45%;
+      min-height: 160px;
+      padding: 26px 26px 20px;
+      border: 2px solid #444949;
+      border-radius: 5px 16px 16px 5px;
+      background:
+        repeating-linear-gradient(
+          0deg,
+          transparent 0,
+          transparent 23px,
+          rgba(39, 79, 62, 0.09) 24px
+        ),
+        #fffdf5;
+      transform: rotate(5deg);
+      box-shadow: 0 8px 18px rgba(31, 31, 33, 0.12);
+      font-family: "Caveat", cursive;
+    }
+
+    .notebook p {
+      margin: 0 0 5px;
+      font-size: 1rem;
+    }
+
+    .coffee {
+      position: absolute;
+      bottom: 113px;
+      left: 7%;
+      z-index: 4;
+      width: 88px;
+      height: 82px;
+      border: 3px solid #363b3b;
+      border-radius: 8px 8px 26px 26px;
+      background: #faf8ef;
+      transform: rotate(-4deg);
+    }
+
+    .coffee::after {
+      position: absolute;
+      top: 18px;
+      right: -30px;
+      width: 32px;
+      height: 35px;
+      border: 3px solid #363b3b;
+      border-left: 0;
+      border-radius: 0 18px 18px 0;
+      content: "";
+    }
+
+    .coffee-flag {
+      position: absolute;
+      top: 28px;
+      left: 35px;
+      width: 20px;
+      height: 27px;
+      border-left: 2px solid var(--scout-green);
+    }
+
+    .coffee-flag::before {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 15px;
+      height: 9px;
+      background: var(--scout-orange);
+      content: "";
+      clip-path: polygon(0 0, 100% 0, 78% 50%, 100% 100%, 0 100%);
+    }
+
+    .plant {
+      position: absolute;
+      right: 3%;
+      bottom: 109px;
+      z-index: 4;
+      width: 106px;
+      height: 120px;
+    }
+
+    .plant-pot {
+      position: absolute;
+      right: 14px;
+      bottom: 0;
+      width: 72px;
+      height: 55px;
+      border: 3px solid #4b504f;
+      border-radius: 6px 6px 20px 20px;
+      background: #ede8db;
+    }
+
+    .leaf {
+      position: absolute;
+      bottom: 47px;
+      left: 48px;
+      width: 16px;
+      height: 70px;
+      border: 3px solid var(--pine-green);
+      border-radius: 80% 10% 80% 10%;
+      transform-origin: bottom;
+    }
+
+    .leaf:nth-child(2) {
+      transform: rotate(-35deg);
+    }
+
+    .leaf:nth-child(3) {
+      transform: rotate(-12deg);
+    }
+
+    .leaf:nth-child(4) {
+      transform: rotate(14deg);
+    }
+
+    .leaf:nth-child(5) {
+      transform: rotate(39deg);
+    }
+
+    .sticky-note {
+      position: absolute;
+      z-index: 6;
+      width: 110px;
+      min-height: 92px;
+      padding: 13px;
+      background: #fff3a6;
+      box-shadow: 0 5px 14px rgba(31, 31, 33, 0.1);
+      color: #4e4a39;
+      font-family: "Caveat", cursive;
+      font-size: 1rem;
+      line-height: 1.1;
+    }
+
+    .sticky-one {
+      top: 84px;
+      right: 8%;
+      transform: rotate(3deg);
+    }
+
+    .sticky-two {
+      top: 186px;
+      right: 2%;
+      transform: rotate(-4deg);
+    }
+
+    /* Features */
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 16px;
+      margin-top: 54px;
+    }
+
+    .feature-card {
+      min-height: 245px;
+      padding: 28px 22px;
+      border: 1px solid var(--stone);
+      border-radius: var(--radius-md);
+      background: rgba(255, 255, 255, 0.7);
+      text-align: center;
+      transition:
+        transform 170ms ease,
+        border-color 170ms ease,
+        background-color 170ms ease;
+    }
+
+    .feature-card:hover {
+      border-color: rgba(214, 90, 31, 0.35);
+      background: var(--white);
+      transform: translateY(-4px);
+    }
+
+    .feature-icon {
+      display: inline-flex;
+      width: 52px;
+      height: 52px;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 22px;
+      border: 1.5px solid var(--scout-green);
+      border-radius: 50%;
+      color: var(--scout-green);
+    }
+
+    .feature-card h3 {
+      margin: 0;
+      font-size: 1rem;
+    }
+
+    .feature-card p {
+      margin: 13px 0 0;
+      color: var(--graphite);
+      font-size: 0.9rem;
+      line-height: 1.65;
+    }
+
+    /* Founder */
+
+    .founder-section {
+      padding-top: 38px;
+    }
+
+    .founder-card {
+      display: grid;
+      grid-template-columns: 0.85fr 1.15fr;
+      gap: 72px;
+      align-items: center;
+      padding: 64px 76px;
+      border-radius: var(--radius-lg);
+      background:
+        radial-gradient(
+          circle at 10% 10%,
+          rgba(214, 90, 31, 0.05),
+          transparent 30%
+        ),
+        var(--sand);
+    }
+
+    .founder-quote {
+      position: relative;
+    }
+
+    .founder-quote blockquote {
+      margin: 0;
+      font-family: "Caveat", cursive;
+      font-size: clamp(2.1rem, 4vw, 3.5rem);
+      font-weight: 600;
+      line-height: 1.07;
+    }
+
+    .hand-underline {
+      position: relative;
+      display: inline-block;
+    }
+
+    .hand-underline::after {
+      position: absolute;
+      right: -3px;
+      bottom: -7px;
+      left: -3px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--scout-orange);
+      content: "";
+      transform: rotate(-1deg);
+    }
+
+    .founder-info {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-top: 30px;
+    }
+
+    .founder-photo {
+      display: inline-flex;
+      width: 52px;
+      height: 52px;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      border-radius: 50%;
+      background: linear-gradient(145deg, #d8d8d5, #b8bbb8);
+      color: var(--scout-green);
+      font-weight: 800;
+    }
+
+    .founder-info strong {
+      display: block;
+      font-size: 0.95rem;
+    }
+
+    .founder-info span {
+      color: var(--graphite);
+      font-size: 0.82rem;
+    }
+
+    .founder-story p {
+      margin: 0 0 20px;
+      color: #42474a;
+      font-size: 1.04rem;
+      line-height: 1.8;
+    }
+
+    /* Audience */
+
+    .audience-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      margin-top: 54px;
+    }
+
+    .audience-item {
+      min-height: 220px;
+      padding: 22px 42px;
+      border-right: 1px solid var(--stone);
+    }
+
+    .audience-item:last-child {
+      border-right: 0;
+    }
+
+    .audience-icon {
+      display: inline-flex;
+      width: 44px;
+      height: 44px;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+      color: var(--scout-green);
+    }
+
+    .audience-item h3 {
+      margin: 0;
+      font-size: 1.05rem;
+    }
+
+    .audience-item p {
+      margin: 13px 0 0;
+      color: var(--graphite);
+      font-size: 0.9rem;
+      line-height: 1.7;
+    }
+
+    /* CTA */
+
+    .cta-section {
+      padding-top: 35px;
+      padding-bottom: 62px;
+    }
+
+    .cta-card {
+      display: grid;
+      grid-template-columns: 1fr 1.15fr;
+      gap: 50px;
+      align-items: center;
+      padding: 46px 54px;
+      border: 1px solid var(--stone);
+      border-radius: var(--radius-md);
+      background: var(--sand);
+    }
+
+    .cta-copy h2 {
+      max-width: 450px;
+      margin: 0;
+      font-size: clamp(1.7rem, 3vw, 2.7rem);
+      line-height: 1.12;
+      letter-spacing: -0.04em;
+    }
+
+    .cta-copy p {
+      max-width: 510px;
+      margin: 16px 0 0;
+      color: var(--graphite);
+    }
+
+    .early-access-form {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 12px;
+    }
+
+    .early-access-form input {
+      width: 100%;
+      min-height: 54px;
+      padding: 0 18px;
+      border: 1px solid #d6d4cf;
+      border-radius: 8px;
+      background: var(--white);
+      outline: none;
+    }
+
+    .early-access-form input:focus {
+      border-color: var(--scout-orange);
+      box-shadow: 0 0 0 3px rgba(214, 90, 31, 0.11);
+    }
+
+    .form-note {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 0.78rem;
+    }
+
+    .form-note svg {
+      color: var(--success);
+    }
+
+    /* Footer */
+
+    .site-footer {
+      padding: 42px 0 54px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.8fr repeat(3, 1fr) auto;
+      gap: 46px;
+      align-items: start;
+    }
+
+    .footer-brand p {
+      margin: 10px 0 0;
+      color: var(--graphite);
+      font-size: 0.86rem;
+    }
+
+    .footer-brand p span {
+      color: var(--scout-orange);
+    }
+
+    .footer-column h3 {
+      margin: 0 0 14px;
+      font-size: 0.82rem;
+    }
+
+    .footer-column a {
+      display: block;
+      margin: 8px 0;
+      color: var(--graphite);
+      font-size: 0.82rem;
+    }
+
+    .footer-column a:hover {
+      color: var(--scout-orange);
+    }
+
+    .social-links {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      padding-top: 6px;
+    }
+
+    .social-link {
+      display: inline-flex;
+      width: 38px;
+      height: 38px;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--stone);
+      border-radius: 50%;
+      background: var(--white);
+    }
+
+    .social-link:hover {
+      border-color: var(--scout-orange);
+      color: var(--scout-orange);
+    }
+
+    /* Mobile nav */
+
+    .mobile-nav {
+      display: none;
+      padding: 10px 0 20px;
+    }
+
+    .mobile-nav.open {
+      display: grid;
+      gap: 7px;
+    }
+
+    .mobile-nav a {
+      padding: 12px 0;
+      border-bottom: 1px solid var(--stone);
+      font-weight: 600;
+    }
+
+    /* Responsive */
+
+    @media (max-width: 1020px) {
+      .main-nav {
+        display: none;
+      }
+
+      .header-inner > .btn {
+        display: none;
+      }
+
+      .mobile-menu-button {
+        display: inline-flex;
+      }
+
+      .hero-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-copy {
+        text-align: center;
+      }
+
+      .hero-copy h1,
+      .hero-copy > p {
+        margin-right: auto;
+        margin-left: auto;
+      }
+
+      .hero-actions {
+        justify-content: center;
+      }
+
+      .hero-point {
+        text-align: left;
+      }
+
+      .hero-visual {
+        min-height: 570px;
+      }
+
+      .features-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .founder-card {
+        gap: 44px;
+        padding: 54px 42px;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1.5fr repeat(3, 1fr);
+      }
+
+      .social-links {
+        grid-column: 1 / -1;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .container {
+        width: min(calc(100% - 28px), var(--container));
+      }
+
+      .section {
+        padding: 70px 0;
+      }
+
+      .hero {
+        padding-top: 38px;
+      }
+
+      .hero-copy h1 {
+        font-size: clamp(2.65rem, 12vw, 4.5rem);
+      }
+
+      .hero-actions {
+        flex-direction: column;
+        gap: 18px;
+      }
+
+      .hero-actions .btn {
+        width: 100%;
+      }
+
+      .hero-points {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-visual {
+        min-height: 480px;
+      }
+
+      .sketch-card {
+        min-height: 470px;
+      }
+
+      .monitor {
+        top: 135px;
+        width: 72%;
+        min-width: 0;
+      }
+
+      .monitor-screen {
+        min-height: 185px;
+      }
+
+      .sticky-note {
+        width: 84px;
+        min-height: 72px;
+        padding: 9px;
+        font-size: 0.82rem;
+      }
+
+      .sticky-one {
+        top: 60px;
+        right: 4%;
+      }
+
+      .sticky-two {
+        top: 143px;
+        right: 0;
+      }
+
+      .notebook {
+        right: 4%;
+        bottom: 45px;
+        width: 54%;
+        min-height: 126px;
+        padding: 18px;
+      }
+
+      .coffee {
+        bottom: 86px;
+        left: 4%;
+        transform: scale(0.78) rotate(-4deg);
+      }
+
+      .plant {
+        display: none;
+      }
+
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .feature-card {
+        min-height: 0;
+      }
+
+      .founder-card {
+        grid-template-columns: 1fr;
+        padding: 40px 26px;
+      }
+
+      .audience-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .audience-item {
+        min-height: 0;
+        padding: 28px 12px;
+        border-right: 0;
+        border-bottom: 1px solid var(--stone);
+      }
+
+      .audience-item:last-child {
+        border-bottom: 0;
+      }
+
+      .cta-card {
+        grid-template-columns: 1fr;
+        padding: 34px 24px;
+      }
+
+      .early-access-form {
+        grid-template-columns: 1fr;
+      }
+
+      .early-access-form .btn {
+        width: 100%;
+      }
+
+      .footer-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .footer-brand {
+        grid-column: 1 / -1;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .logo {
+        font-size: 1.65rem;
+      }
+
+      .logo-mark {
+        width: 39px;
+        height: 39px;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .social-links {
+        grid-column: auto;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="container">
+      <div class="header-inner">
+        <a class="logo" href="#top" aria-label="Scout homepage">
+          <span class="logo-mark">
+            <svg viewBox="0 0 64 64" aria-hidden="true">
+              <path
+                d="M15 50c7-4 13-8 18-15 4-5 7-11 13-19"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="4"
+                stroke-linecap="round"
+              />
+              <path
+                d="M18 51c5-2 9-2 14 0"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="4"
+                stroke-linecap="round"
+              />
+              <path
+                d="M42 11v20"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="3"
+                stroke-linecap="round"
+              />
+              <path
+                d="M43 11h13l-4 5 4 5H43z"
+                fill="#d65a1f"
+              />
+            </svg>
+          </span>
+          Scout
+        </a>
+
+        <nav class="main-nav" aria-label="Primary navigation">
+          <a href="#story">Why we built Scout</a>
+          <a href="#features">Features</a>
+          <a href="#audience">Who it’s for</a>
+          <a href="#early-access">Early access</a>
+        </nav>
+
+        <a class="btn btn-secondary" href="#early-access">
+          Request early access
+        </a>
+
+        <button
+          class="mobile-menu-button"
+          id="mobileMenuButton"
+          type="button"
+          aria-label="Open navigation"
+          aria-expanded="false"
+        >
+          <svg
+            width="22"
+            height="22"
+            viewBox="0 0 24 24"
+            fill="none"
+            aria-hidden="true"
+          >
+            <path
+              d="M4 7h16M4 12h16M4 17h16"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+            />
+          </svg>
+        </button>
+      </div>
+
+      <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
+        <a href="#story">Why we built Scout</a>
+        <a href="#features">Features</a>
+        <a href="#audience">Who it’s for</a>
+        <a href="#early-access">Early access</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container">
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <h1>
+              Growing your territory is hard enough.
+              <span>Keeping everything organized shouldn’t be.</span>
+            </h1>
+
+            <p>
+              Scout is the simple home for your customers, opportunities,
+              follow-ups, commissions, and everything in between. Less
+              searching. More selling.
+            </p>
+
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="#early-access">
+                Request early access
+              </a>
+
+              <a class="text-link" href="#story">
+                Why we built Scout
+                <span aria-hidden="true">→</span>
+              </a>
+            </div>
+
+            <div class="hero-points">
+              <article class="hero-point">
+                <span class="hero-point-icon">
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M5 17c3-1 5-3 7-6 2-2 3-4 6-6"
+                      stroke="currentColor"
+                      stroke-width="1.8"
+                      stroke-linecap="round"
+                    />
+                    <path
+                      d="M16 5h4l-1.5 1.5L20 8h-4z"
+                      fill="#d65a1f"
+                    />
+                  </svg>
+                </span>
+
+                <div>
+                  <h3>Find the right accounts</h3>
+                  <p>Everything important in one place.</p>
+                </div>
+              </article>
+
+              <article class="hero-point">
+                <span class="hero-point-icon">
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M5 18l5-7 3 4 2-3 4 6H5z"
+                      stroke="currentColor"
+                      stroke-width="1.7"
+                      stroke-linejoin="round"
+                    />
+                    <path
+                      d="M14 7v6M14 7h5l-2 2 2 2h-5"
+                      stroke="#d65a1f"
+                      stroke-width="1.6"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </span>
+
+                <div>
+                  <h3>Build stronger relationships</h3>
+                  <p>Know every interaction.</p>
+                </div>
+              </article>
+
+              <article class="hero-point">
+                <span class="hero-point-icon">
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M5 19v-4h3v4M10.5 19v-7h3v7M16 19V8h3v11"
+                      stroke="currentColor"
+                      stroke-width="1.7"
+                    />
+                    <path
+                      d="M5 11l4-3 4 1 6-5"
+                      stroke="#d65a1f"
+                      stroke-width="1.7"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </span>
+
+                <div>
+                  <h3>Grow your business</h3>
+                  <p>Win more, faster.</p>
+                </div>
+              </article>
+            </div>
+          </div>
+
+          <div class="hero-visual" aria-label="Illustration of Scout workspace">
+            <div class="sketch-card">
+              <svg
+                class="mountain-lines"
+                viewBox="0 0 800 240"
+                fill="none"
+                aria-hidden="true"
+              >
+                <path
+                  d="M0 205L110 130l55 41 95-98 71 81 54-59 92 100 82-74 100 84"
+                  stroke="#314b43"
+                  stroke-width="3"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M42 205l92-57 32 24 95-99 33 36"
+                  stroke="#314b43"
+                  stroke-width="1.4"
+                  opacity=".6"
+                />
+                <path
+                  d="M386 195l57-65 34 31 78-72 40 47"
+                  stroke="#314b43"
+                  stroke-width="1.4"
+                  opacity=".6"
+                />
+              </svg>
+
+              <div class="sticky-note sticky-one">
+                People<br />
+                Relationships<br />
+                Follow up
+              </div>
+
+              <div class="sticky-note sticky-two">
+                Focus<br />
+                Plan<br />
+                Win
+              </div>
+
+              <div class="monitor">
+                <div class="monitor-top"></div>
+
+                <div class="monitor-screen">
+                  <div class="monitor-sidebar">
+                    <div class="screen-logo">Scout</div>
+                    <div class="screen-line"></div>
+                    <div class="screen-line short"></div>
+                    <div class="screen-line"></div>
+                    <div class="screen-line short"></div>
+                    <div class="screen-line"></div>
+                  </div>
+
+                  <div class="monitor-content">
+                    <div class="monitor-title"></div>
+
+                    <div class="mini-card">
+                      <div class="mini-card-line"></div>
+                      <div class="mini-card-dot"></div>
+                    </div>
+
+                    <div class="mini-card">
+                      <div class="mini-card-line"></div>
+                      <div class="mini-card-dot"></div>
+                    </div>
+
+                    <div class="mini-card">
+                      <div class="mini-card-line"></div>
+                      <div class="mini-card-dot"></div>
+                    </div>
+
+                    <div class="mini-card">
+                      <div class="mini-card-line"></div>
+                      <div class="mini-card-dot"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="desk-line"></div>
+
+              <div class="coffee">
+                <span class="coffee-flag"></span>
+              </div>
+
+              <div class="notebook">
+                <p>☑ Follow up with ACME</p>
+                <p>☑ Quote for White Cap</p>
+                <p>☑ Check in with Midwest</p>
+                <p>☐ New opportunity — ABC</p>
+              </div>
+
+              <div class="plant">
+                <span class="leaf"></span>
+                <span class="leaf"></span>
+                <span class="leaf"></span>
+                <span class="leaf"></span>
+                <span class="plant-pot"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="features">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">Built for outside sales</p>
+
+          <h2>
+            Everything you need.<br />
+            Nothing you don’t.
+          </h2>
+
+          <p>
+            Scout brings your territory, pipeline, customers, and daily activity
+            together in one simple workspace.
+          </p>
+        </div>
+
+        <div class="features-grid">
+          <article class="feature-card">
+            <span class="feature-icon">
+              <svg
+                width="25"
+                height="25"
+                viewBox="0 0 24 24"
+                fill="none"
+                aria-hidden="true"
+              >
+                <circle
+                  cx="12"
+                  cy="8"
+                  r="4"
+                  stroke="currentColor"
+                  stroke-width="1.7"
+                />
+                <path
+                  d="M4.5 20c.5-4 3-6 7.5-6s7 2 7.5 6"
+                  stroke="currentColor"
+                  stroke-width="1.7"
+                  stroke-linecap="round"
+                />
+              </svg>
+            </span>
+
+            <h3>Accounts &amp; Contacts</h3>
+
+            <p>
+              Keep every account and contact organized and up to date.
+            </p>
+          </article>
+
+          <article class="feature-card">
+            <span class="feature-icon">
+              <svg
+                width="25"
+                height="25"
+                viewBox="0 0 24 24"
+                fill="none"
+                aria-hidden="true"
+              >
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="8"
+                  stroke="currentColor"
+                  stroke-width="1.7"
+                />
+                <path
+                  d="M12 7v10M15 9.2c-.7-.7-1.7-1.2-3-1.2-1.6 0-2.8.8-2.8 2 0 3 5.6 1.4 5.6 4.1 0 1.1-1.1 1.9-2.8 1.9-1.4 0-2.6-.5-3.3-1.3"
+                  stroke="currentColor"
+                  stroke-width="1.4"
+                  stroke-linecap="round"
+                />
+              </svg>
+            </span>
+
+            <h3>Opportunities</h3>
+
+            <p>
+              Track your pipeline visually and move deals forward.
+            </p>
+          </article>
+
+          <article class="feature-card">
+            <span class="feature-icon">
+              <svg
+                width="25"
+                height="25"
+                viewBox="0 0 24 24"
+                fill="none"
+                aria-hidden="true"
+              >
+                <rect
+                  x="5"
+                  y="5"
+                  width="14"
+                  height="14"
+                  rx="3"
+                  stroke="currentColor"
+                  stroke-width="1.7"
+                />
+                <path
+                  d="M8.5 12l2.2 2.2 4.8-5"
+                  stroke="currentColor"
+                  stroke-width="1.7"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </span>
+
+            <h3>Activities &amp; Follow-ups</h3>
+
+            <p>
+              Never forget a follow-up or miss an opportunity to connect.
+            </p>
+          </article>
+
+          <article class="feature-card">
+            <span class="feature-icon">
+              <svg
+                width="25"
+                height="25"
+                viewBox="0 0 24 24"
+                fill="none"
+                aria-hidden="true"
+              >
+                <path
+                  d="M7 3h7l4 4v14H7z"
+                  stroke="currentColor"
+                  stroke-width="1.7"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M14 3v5h5M10 12h5M10 16h5"
+                  stroke="currentColor"
+                  stroke-width="1.7"
+                  stroke-linecap="round"
+                />
+              </svg>
+            </span>
+
+            <h3>Notes &amp; History</h3>
+
+            <p>
+              Keep conversations, notes, files, and history where you need them.
+            </p>
+          </article>
+
+          <article class="feature-card">
+            <span class="feature-icon">
+              <svg
+                width="25"
+                height="25"
+                viewBox="0 0 24 24"
+                fill="none"
+                aria-hidden="true"
+              >
+                <path
+                  d="M5 19v-4h3v4M10.5 19v-8h3v8M16 19V6h3v13"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                />
+              </svg>
+            </span>
+
+            <h3>Reports</h3>
+
+            <p>
+              Simple insights that help you focus on what drives results.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section founder-section" id="story">
+      <div class="container">
+        <div class="founder-card">
+          <div class="founder-quote">
+            <blockquote>
+              “We built Scout because we needed it for our
+              <span class="hand-underline">own business.</span>”
+            </blockquote>
+
+            <div class="founder-info">
+              <div class="founder-photo">JS</div>
+
+              <div>
+                <strong>Jeff Short</strong>
+                <span>Founder</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="founder-story">
+            <p>
+              As our businesses grew, we were constantly searching for
+              information, digging through emails, and trying to keep track of
+              everything in spreadsheets.
+            </p>
+
+            <p>
+              We built Scout to solve those problems for ourselves. Now we’re
+              building it for outside sales reps and small teams who are tired
+              of software that’s too complicated.
+            </p>
+
+            <a class="text-link" href="#early-access">
+              Read why we built Scout
+              <span aria-hidden="true">→</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="audience">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">Made for small teams</p>
+          <h2>Scout is for people who sell.</h2>
+        </div>
+
+        <div class="audience-grid">
+          <article class="audience-item">
+            <span class="audience-icon">
+              <svg
+                width="42"
+                height="42"
+                viewBox="0 0 48 48"
+                fill="none"
+                aria-hidden="true"
+              >
+                <circle
+                  cx="24"
+                  cy="15"
+                  r="6"
+                  stroke="currentColor"
+                  stroke-width="2"
+                />
+                <circle
+                  cx="11"
+                  cy="19"
+                  r="4"
+                  stroke="currentColor"
+                  stroke-width="2"
+                />
+                <circle
+                  cx="37"
+                  cy="19"
+                  r="4"
+                  stroke="currentColor"
+                  stroke-width="2"
+                />
+                <path
+                  d="M14 38c.7-8 4-12 10-12s9.3 4 10 12M3 37c.4-6 3-9 8-9 2.4 0 4.3.7 5.7 2M45 37c-.4-6-3-9-8-9-2.4 0-4.3.7-5.7 2"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                />
+              </svg>
+            </span>
+
+            <h3>Outside sales reps</h3>
+
+            <p>
+              Manage your territory, pipeline, commissions, and follow-ups so
+              you can focus on building relationships.
+            </p>
+          </article>
+
+          <article class="audience-item">
+            <span class="audience-icon">
+              <svg
+                width="42"
+                height="42"
+                viewBox="0 0 48 48"
+                fill="none"
+                aria-hidden="true"
+              >
+                <rect
+                  x="8"
+                  y="14"
+                  width="32"
+                  height="25"
+                  rx="4"
+                  stroke="currentColor"
+                  stroke-width="2"
+                />
+                <path
+                  d="M18 14v-3h12v3M8 23h32M20 23v4h8v-4"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </span>
+
+            <h3>Sales managers</h3>
+
+            <p>
+              Keep your team aligned, see what’s happening, and coach with the
+              right information.
+            </p>
+          </article>
+
+          <article class="audience-item">
+            <span class="audience-icon">
+              <svg
+                width="42"
+                height="42"
+                viewBox="0 0 48 48"
+                fill="none"
+                aria-hidden="true"
+              >
+                <path
+                  d="M8 40V16h12v24M20 40V8h18v32M12 22h4M12 28h4M12 34h4M25 14h4M33 14h1M25 21h4M33 21h1M25 28h4M33 28h1M25 35h4M33 35h1"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                />
+              </svg>
+            </span>
+
+            <h3>Small businesses</h3>
+
+            <p>
+              Get a powerful sales system without the complexity, cost, or
+              long implementation.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-section" id="early-access">
+      <div class="container">
+        <div class="cta-card">
+          <div class="cta-copy">
+            <p class="eyebrow">We’re early</p>
+
+            <h2>You can help shape what’s next.</h2>
+
+            <p>
+              Scout is currently in early access. Join the list to get early
+              access and help shape the future of Scout.
+            </p>
+          </div>
+
+          <div>
+            <form
+              class="early-access-form"
+              action="https://formspree.io/f/YOUR_FORM_ID"
+              method="POST"
+            >
+              <label for="email" style="position:absolute;left:-9999px;">
+                Work email
+              </label>
+
+              <input
+                id="email"
+                name="email"
+                type="email"
+                placeholder="Your work email"
+                autocomplete="email"
+                required
+              />
+
+              <button class="btn btn-primary" type="submit">
+                Request early access
+              </button>
+            </form>
+
+            <div class="form-note">
+              <svg
+                width="15"
+                height="15"
+                viewBox="0 0 24 24"
+                fill="none"
+                aria-hidden="true"
+              >
+                <path
+                  d="M5 12.5l4 4L19 7"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+
+              No spam. Just early access updates.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="logo" href="#top">
+            <span class="logo-mark">
+              <svg viewBox="0 0 64 64" aria-hidden="true">
+                <path
+                  d="M15 50c7-4 13-8 18-15 4-5 7-11 13-19"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="4"
+                  stroke-linecap="round"
+                />
+                <path
+                  d="M18 51c5-2 9-2 14 0"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="4"
+                  stroke-linecap="round"
+                />
+                <path
+                  d="M42 11v20"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="3"
+                  stroke-linecap="round"
+                />
+                <path
+                  d="M43 11h13l-4 5 4 5H43z"
+                  fill="#d65a1f"
+                />
+              </svg>
+            </span>
+            Scout
+          </a>
+
+          <p>Find. Build. <span>Grow.</span></p>
+        </div>
+
+        <div class="footer-column">
+          <h3>Product</h3>
+          <a href="#features">Features</a>
+          <a href="#early-access">Early access</a>
+        </div>
+
+        <div class="footer-column">
+          <h3>Company</h3>
+          <a href="#story">Why we built Scout</a>
+          <a href="#story">Our story</a>
+        </div>
+
+        <div class="footer-column">
+          <h3>Legal</h3>
+          <a href="#">Privacy</a>
+          <a href="#">Terms</a>
+        </div>
+
+        <div class="social-links">
+          <a class="social-link" href="#" aria-label="X">
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                d="M18.6 2H22l-7.4 8.5L23.3 22h-6.8l-5.3-6.9L5.2 22H1.8l7.8-8.9L1.3 2h6.9l4.8 6.3L18.6 2zm-1.2 18h1.9L7.2 3.9h-2L17.4 20z"
+              />
+            </svg>
+          </a>
+
+          <a class="social-link" href="#" aria-label="LinkedIn">
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                d="M6.5 8.2H3V21h3.5V8.2zM4.8 3A2.1 2.1 0 1 0 4.8 7.2 2.1 2.1 0 0 0 4.8 3zM21 13.7c0-3.8-2-5.6-4.7-5.6-2.2 0-3.2 1.2-3.8 2v-1.7H9V21h3.5v-6.2c0-1.6.3-3.2 2.3-3.2 2 0 2 1.8 2 3.3V21H21v-7.3z"
+              />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const mobileMenuButton = document.getElementById("mobileMenuButton");
+    const mobileNav = document.getElementById("mobileNav");
+
+    mobileMenuButton.addEventListener("click", () => {
+      const isOpen = mobileNav.classList.toggle("open");
+      mobileMenuButton.setAttribute("aria-expanded", String(isOpen));
+    });
+
+    mobileNav.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        mobileNav.classList.remove("open");
+        mobileMenuButton.setAttribute("aria-expanded", "false");
+      });
+    });
+  </script>
+</body>
+</html>
