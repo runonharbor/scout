@@ -1,0 +1,2061 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Scout Isn’t Another CRM — It’s the Tool Your CRM Has Been Missing</title>
+
+  <meta
+    name="description"
+    content="Scout isn't another CRM. It's the specialized workspace outside sales teams use to organize territories, customer relationships, opportunities, follow-ups, and daily activity alongside the CRM their company already trusts."
+  />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    :root {
+      --scout-green: #1f4d3f;
+      --pine-green: #2f6b53;
+      --scout-orange: #d65a1f;
+      --scout-orange-dark: #bd4814;
+
+      --sand: #f7f5f0;
+      --warm-white: #fcfbf8;
+      --white: #ffffff;
+      --stone: #e2dfda;
+
+      --charcoal: #1f1f21;
+      --graphite: #5c6168;
+      --muted: #767a7e;
+      --success: #2e7d5a;
+
+      --radius-sm: 10px;
+      --radius-md: 18px;
+      --radius-lg: 28px;
+
+      --shadow-soft:
+        0 18px 50px rgba(31, 31, 33, 0.06),
+        0 2px 10px rgba(31, 31, 33, 0.04);
+
+      --container: 1180px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background:
+        radial-gradient(
+          circle at 83% 4%,
+          rgba(214, 90, 31, 0.045),
+          transparent 25%
+        ),
+        var(--warm-white);
+      color: var(--charcoal);
+      font-family: "Inter", Arial, sans-serif;
+      line-height: 1.6;
+    }
+
+    img,
+    svg {
+      display: block;
+      max-width: 100%;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    .container {
+      width: min(calc(100% - 40px), var(--container));
+      margin: 0 auto;
+    }
+
+    .narrow-container {
+      width: min(calc(100% - 40px), 860px);
+      margin: 0 auto;
+    }
+
+    .section {
+      padding: 100px 0;
+    }
+
+    .section-soft {
+      background: var(--sand);
+    }
+
+    .eyebrow {
+      margin: 0 0 14px;
+      color: var(--scout-orange);
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .section-heading {
+      max-width: 760px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .section-heading h2 {
+      margin: 0;
+      font-size: clamp(2rem, 4vw, 3.45rem);
+      line-height: 1.08;
+      letter-spacing: -0.045em;
+    }
+
+    .section-heading p {
+      max-width: 670px;
+      margin: 22px auto 0;
+      color: var(--graphite);
+      font-size: 1.06rem;
+      line-height: 1.75;
+    }
+
+    .btn {
+      display: inline-flex;
+      min-height: 50px;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      padding: 0 22px;
+      border: 1px solid transparent;
+      border-radius: 9px;
+      cursor: pointer;
+      font-weight: 700;
+      transition:
+        transform 160ms ease,
+        background-color 160ms ease,
+        border-color 160ms ease,
+        color 160ms ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .btn-primary {
+      background: var(--scout-orange);
+      color: var(--white);
+    }
+
+    .btn-primary:hover {
+      background: var(--scout-orange-dark);
+    }
+
+    .btn-secondary {
+      border-color: var(--scout-orange);
+      background: transparent;
+      color: var(--scout-orange);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(214, 90, 31, 0.06);
+    }
+
+    .text-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--scout-green);
+      font-weight: 700;
+    }
+
+    .text-link:hover {
+      color: var(--scout-orange);
+    }
+
+    /* Header */
+
+    .site-header {
+      position: relative;
+      z-index: 20;
+      padding: 22px 0;
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 28px;
+    }
+
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
+      color: var(--scout-green);
+      font-size: 2rem;
+      font-weight: 800;
+      letter-spacing: -0.045em;
+    }
+
+    .main-nav {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      color: #34373a;
+      font-size: 0.94rem;
+      font-weight: 600;
+    }
+
+    .main-nav a {
+      transition: color 150ms ease;
+    }
+
+    .main-nav a:hover,
+    .main-nav a.active {
+      color: var(--scout-orange);
+    }
+
+    .mobile-menu-button {
+      display: none;
+      width: 44px;
+      height: 44px;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--stone);
+      border-radius: 9px;
+      background: var(--white);
+      cursor: pointer;
+    }
+
+    .mobile-nav {
+      display: none;
+      padding: 10px 0 20px;
+    }
+
+    .mobile-nav.open {
+      display: grid;
+      gap: 7px;
+    }
+
+    .mobile-nav a {
+      padding: 12px 0;
+      border-bottom: 1px solid var(--stone);
+      font-weight: 600;
+    }
+
+    /* Hero */
+
+    .hero {
+      padding: 70px 0 112px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(400px, 0.9fr);
+      gap: 74px;
+      align-items: center;
+    }
+
+    .hero-copy h1 {
+      max-width: 760px;
+      margin: 0;
+      font-size: clamp(3rem, 5.2vw, 5.5rem);
+      line-height: 0.98;
+      letter-spacing: -0.06em;
+    }
+
+    .hero-copy h1 span {
+      display: block;
+      margin-top: 22px;
+      color: var(--scout-orange);
+      font-size: 0.67em;
+      line-height: 1.04;
+      letter-spacing: -0.045em;
+    }
+
+    .hero-copy > p {
+      max-width: 660px;
+      margin: 30px 0 0;
+      color: var(--graphite);
+      font-size: 1.12rem;
+      line-height: 1.8;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 26px;
+      margin-top: 36px;
+    }
+
+    .hero-visual {
+      position: relative;
+      min-height: 530px;
+    }
+
+    .crm-gap-card {
+      position: relative;
+      overflow: hidden;
+      min-height: 510px;
+      padding: 50px 42px;
+      border-radius: 32px;
+      background:
+        linear-gradient(
+          rgba(255, 255, 255, 0.15),
+          rgba(255, 255, 255, 0.15)
+        ),
+        repeating-linear-gradient(
+          0deg,
+          transparent 0,
+          transparent 27px,
+          rgba(31, 77, 63, 0.04) 28px
+        ),
+        #f8f5ec;
+    }
+
+    .crm-gap-card::before {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(
+          circle at 50% 45%,
+          rgba(255, 255, 255, 0.95),
+          transparent 52%
+        );
+      content: "";
+    }
+
+    .mountain-lines {
+      position: absolute;
+      top: 24px;
+      left: 50%;
+      width: 95%;
+      transform: translateX(-50%);
+      opacity: 0.23;
+    }
+
+    .flow {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      gap: 15px;
+      max-width: 380px;
+      margin: 0 auto;
+    }
+
+    .flow-card {
+      position: relative;
+      display: grid;
+      grid-template-columns: 48px 1fr;
+      gap: 15px;
+      align-items: center;
+      min-height: 82px;
+      padding: 14px 18px;
+      border: 1px solid var(--stone);
+      border-radius: 15px;
+      background: rgba(255, 255, 255, 0.94);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .flow-card.highlight {
+      border: 2px solid var(--scout-orange);
+      background: #fffaf6;
+      transform: rotate(-1deg);
+    }
+
+    .flow-icon {
+      display: inline-flex;
+      width: 44px;
+      height: 44px;
+      align-items: center;
+      justify-content: center;
+      border: 1.5px solid var(--scout-green);
+      border-radius: 50%;
+      color: var(--scout-green);
+    }
+
+    .flow-card.highlight .flow-icon {
+      border-color: var(--scout-orange);
+      color: var(--scout-orange);
+    }
+
+    .flow-card strong {
+      display: block;
+      font-size: 0.98rem;
+    }
+
+    .flow-card span {
+      display: block;
+      margin-top: 3px;
+      color: var(--muted);
+      font-size: 0.8rem;
+    }
+
+    .flow-arrow {
+      display: flex;
+      justify-content: center;
+      height: 18px;
+      color: var(--scout-green);
+    }
+
+    .flow-note {
+      position: absolute;
+      right: 18px;
+      bottom: 20px;
+      z-index: 4;
+      max-width: 170px;
+      padding: 14px 17px;
+      background: #fff3a6;
+      box-shadow: 0 6px 16px rgba(31, 31, 33, 0.11);
+      color: #4e4a39;
+      font-family: "Caveat", cursive;
+      font-size: 1.15rem;
+      line-height: 1.1;
+      transform: rotate(3deg);
+    }
+
+    /* Intro statement */
+
+    .belief-section {
+      padding: 15px 0 105px;
+    }
+
+    .belief-card {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 50px 60px;
+      border: 1px solid var(--stone);
+      border-radius: var(--radius-lg);
+      background: var(--white);
+      box-shadow: var(--shadow-soft);
+      text-align: center;
+    }
+
+    .belief-card p {
+      margin: 0;
+      font-family: "Caveat", cursive;
+      font-size: clamp(2rem, 4vw, 3.4rem);
+      font-weight: 600;
+      line-height: 1.12;
+    }
+
+    .belief-card p span {
+      color: var(--scout-orange);
+    }
+
+    /* Questions */
+
+    .questions-grid {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 80px;
+      align-items: start;
+      margin-top: 58px;
+    }
+
+    .questions-intro {
+      position: sticky;
+      top: 40px;
+    }
+
+    .questions-intro h2 {
+      margin: 0;
+      font-size: clamp(2.2rem, 4vw, 3.7rem);
+      line-height: 1.05;
+      letter-spacing: -0.05em;
+    }
+
+    .questions-intro p {
+      margin: 24px 0 0;
+      color: var(--graphite);
+      font-size: 1.05rem;
+      line-height: 1.8;
+    }
+
+    .question-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .question-card {
+      display: grid;
+      grid-template-columns: 42px 1fr;
+      gap: 15px;
+      align-items: center;
+      min-height: 78px;
+      padding: 17px 20px;
+      border: 1px solid var(--stone);
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.78);
+    }
+
+    .question-number {
+      display: inline-flex;
+      width: 39px;
+      height: 39px;
+      align-items: center;
+      justify-content: center;
+      border: 1.5px solid var(--scout-green);
+      border-radius: 50%;
+      color: var(--scout-green);
+      font-family: "Caveat", cursive;
+      font-size: 1.25rem;
+      font-weight: 700;
+    }
+
+    .question-card p {
+      margin: 0;
+      font-size: 1rem;
+      font-weight: 600;
+      line-height: 1.5;
+    }
+
+    .selling-questions {
+      margin-top: 34px;
+      padding: 22px 25px;
+      border-left: 4px solid var(--scout-orange);
+      background: rgba(214, 90, 31, 0.055);
+    }
+
+    .selling-questions strong {
+      display: block;
+      color: var(--scout-orange);
+      font-size: 1.05rem;
+    }
+
+    .selling-questions p {
+      margin: 7px 0 0;
+      color: var(--graphite);
+    }
+
+    /* Two tool comparison */
+
+    .comparison-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 60px;
+    }
+
+    .comparison-card {
+      position: relative;
+      overflow: hidden;
+      padding: 42px 40px;
+      border: 1px solid var(--stone);
+      border-radius: var(--radius-lg);
+      background: var(--white);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .comparison-card.scout {
+      border-color: rgba(214, 90, 31, 0.35);
+      background:
+        radial-gradient(
+          circle at 90% 0,
+          rgba(214, 90, 31, 0.08),
+          transparent 32%
+        ),
+        var(--white);
+    }
+
+    .comparison-label {
+      display: inline-flex;
+      min-height: 31px;
+      align-items: center;
+      padding: 0 12px;
+      border-radius: 20px;
+      background: rgba(31, 77, 63, 0.08);
+      color: var(--scout-green);
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .comparison-card.scout .comparison-label {
+      background: rgba(214, 90, 31, 0.09);
+      color: var(--scout-orange);
+    }
+
+    .comparison-card h3 {
+      margin: 20px 0 0;
+      font-size: 2rem;
+      letter-spacing: -0.04em;
+    }
+
+    .comparison-card > p {
+      margin: 14px 0 0;
+      color: var(--graphite);
+      line-height: 1.75;
+    }
+
+    .comparison-list {
+      display: grid;
+      gap: 14px;
+      margin-top: 30px;
+    }
+
+    .comparison-item {
+      display: grid;
+      grid-template-columns: 29px 1fr;
+      gap: 11px;
+      align-items: center;
+      padding-bottom: 14px;
+      border-bottom: 1px solid #efede8;
+    }
+
+    .comparison-item:last-child {
+      padding-bottom: 0;
+      border-bottom: 0;
+    }
+
+    .comparison-check {
+      display: inline-flex;
+      width: 27px;
+      height: 27px;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--stone);
+      border-radius: 50%;
+      color: var(--scout-green);
+    }
+
+    .comparison-card.scout .comparison-check {
+      border-color: rgba(214, 90, 31, 0.35);
+      color: var(--scout-orange);
+    }
+
+    .comparison-item span:last-child {
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+
+    /* Outside sales */
+
+    .field-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 78px;
+      align-items: center;
+    }
+
+    .field-copy h2 {
+      margin: 0;
+      font-size: clamp(2.2rem, 4vw, 3.7rem);
+      line-height: 1.05;
+      letter-spacing: -0.05em;
+    }
+
+    .field-copy p {
+      margin: 25px 0 0;
+      color: var(--graphite);
+      font-size: 1.06rem;
+      line-height: 1.8;
+    }
+
+    .field-moments {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+    }
+
+    .moment-card {
+      min-height: 145px;
+      padding: 22px;
+      border: 1px solid var(--stone);
+      border-radius: 17px;
+      background: rgba(255, 255, 255, 0.78);
+    }
+
+    .moment-icon {
+      display: inline-flex;
+      width: 42px;
+      height: 42px;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+      border: 1.5px solid var(--scout-green);
+      border-radius: 50%;
+      color: var(--scout-green);
+    }
+
+    .moment-card h3 {
+      margin: 0;
+      font-size: 0.98rem;
+    }
+
+    .moment-card p {
+      margin: 7px 0 0;
+      color: var(--muted);
+      font-size: 0.82rem;
+      line-height: 1.5;
+    }
+
+    /* Day flow */
+
+    .day-flow {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 12px;
+      margin-top: 60px;
+    }
+
+    .day-step {
+      position: relative;
+      min-height: 175px;
+      padding: 26px 18px 22px;
+      border: 1px solid var(--stone);
+      border-radius: var(--radius-md);
+      background: var(--white);
+      text-align: center;
+    }
+
+    .day-step:not(:last-child)::after {
+      position: absolute;
+      top: 50%;
+      right: -19px;
+      z-index: 3;
+      color: var(--scout-orange);
+      content: "→";
+      font-size: 1.3rem;
+      font-weight: 800;
+      transform: translateY(-50%);
+    }
+
+    .day-step-number {
+      display: inline-flex;
+      width: 38px;
+      height: 38px;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 17px;
+      border: 1.5px solid var(--scout-green);
+      border-radius: 50%;
+      color: var(--scout-green);
+      font-family: "Caveat", cursive;
+      font-size: 1.25rem;
+      font-weight: 700;
+    }
+
+    .day-step.scout-step {
+      border: 2px solid var(--scout-orange);
+      background: #fffaf6;
+    }
+
+    .day-step.scout-step .day-step-number {
+      border-color: var(--scout-orange);
+      color: var(--scout-orange);
+    }
+
+    .day-step h3 {
+      margin: 0;
+      font-size: 0.94rem;
+      line-height: 1.35;
+    }
+
+    .day-step p {
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-size: 0.78rem;
+      line-height: 1.5;
+    }
+
+    .day-result {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+      max-width: 720px;
+      margin: 35px auto 0;
+    }
+
+    .result-card {
+      padding: 18px 20px;
+      border: 1px solid var(--stone);
+      border-radius: 13px;
+      background: rgba(255, 255, 255, 0.75);
+      text-align: center;
+      font-weight: 700;
+    }
+
+    .result-card span {
+      color: var(--scout-orange);
+    }
+
+    /* Founder story */
+
+    .story-card {
+      display: grid;
+      grid-template-columns: 0.85fr 1.15fr;
+      gap: 74px;
+      align-items: center;
+      padding: 66px 76px;
+      border-radius: var(--radius-lg);
+      background:
+        radial-gradient(
+          circle at 8% 10%,
+          rgba(214, 90, 31, 0.055),
+          transparent 30%
+        ),
+        var(--sand);
+    }
+
+    .story-quote blockquote {
+      margin: 0;
+      font-family: "Caveat", cursive;
+      font-size: clamp(2.2rem, 4vw, 3.65rem);
+      font-weight: 600;
+      line-height: 1.06;
+    }
+
+    .hand-underline {
+      position: relative;
+      display: inline-block;
+    }
+
+    .hand-underline::after {
+      position: absolute;
+      right: -3px;
+      bottom: -7px;
+      left: -3px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--scout-orange);
+      content: "";
+      transform: rotate(-1deg);
+    }
+
+    .founder-info {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-top: 30px;
+    }
+
+    .founder-photo {
+      display: inline-flex;
+      width: 52px;
+      height: 52px;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      border-radius: 50%;
+      background: linear-gradient(145deg, #d8d8d5, #b8bbb8);
+      color: var(--scout-green);
+      font-weight: 800;
+    }
+
+    .founder-info strong {
+      display: block;
+      font-size: 0.95rem;
+    }
+
+    .founder-info span {
+      color: var(--graphite);
+      font-size: 0.82rem;
+    }
+
+    .story-copy p {
+      margin: 0 0 20px;
+      color: #42474a;
+      font-size: 1.08rem;
+      line-height: 1.85;
+    }
+
+    /* Big quote */
+
+    .quote-section {
+      padding: 115px 0;
+    }
+
+    .big-quote {
+      max-width: 980px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .big-quote blockquote {
+      margin: 0;
+      font-family: "Caveat", cursive;
+      font-size: clamp(2.7rem, 6vw, 5.8rem);
+      font-weight: 600;
+      line-height: 1.02;
+      letter-spacing: -0.025em;
+    }
+
+    .big-quote blockquote span {
+      display: block;
+      margin-top: 24px;
+      color: var(--scout-orange);
+    }
+
+    /* CRM platforms */
+
+    .platform-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 15px;
+      margin-top: 52px;
+    }
+
+    .platform-card {
+      display: flex;
+      min-height: 105px;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      border: 1px solid var(--stone);
+      border-radius: 15px;
+      background: var(--white);
+      color: #42474a;
+      font-size: 0.94rem;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    .platform-note {
+      max-width: 690px;
+      margin: 28px auto 0;
+      color: var(--graphite);
+      text-align: center;
+    }
+
+    /* CTA */
+
+    .cta-section {
+      padding: 35px 0 70px;
+    }
+
+    .cta-card {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 50px;
+      align-items: center;
+      padding: 52px 58px;
+      border: 1px solid var(--stone);
+      border-radius: var(--radius-lg);
+      background:
+        radial-gradient(
+          circle at 10% 20%,
+          rgba(214, 90, 31, 0.06),
+          transparent 31%
+        ),
+        var(--sand);
+    }
+
+    .cta-copy h2 {
+      max-width: 720px;
+      margin: 0;
+      font-size: clamp(2rem, 4vw, 3.4rem);
+      line-height: 1.07;
+      letter-spacing: -0.045em;
+    }
+
+    .cta-copy h2 span {
+      display: block;
+      margin-top: 10px;
+      color: var(--scout-orange);
+    }
+
+    .cta-copy p {
+      max-width: 660px;
+      margin: 19px 0 0;
+      color: var(--graphite);
+      line-height: 1.75;
+    }
+
+    /* Footer */
+
+    .site-footer {
+      padding: 42px 0 54px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.8fr repeat(3, 1fr);
+      gap: 46px;
+      align-items: start;
+    }
+
+    .footer-brand p {
+      margin: 10px 0 0;
+      color: var(--graphite);
+      font-size: 0.86rem;
+    }
+
+    .footer-brand p span {
+      color: var(--scout-orange);
+    }
+
+    .footer-column h3 {
+      margin: 0 0 14px;
+      font-size: 0.82rem;
+    }
+
+    .footer-column a {
+      display: block;
+      margin: 8px 0;
+      color: var(--graphite);
+      font-size: 0.82rem;
+    }
+
+    .footer-column a:hover {
+      color: var(--scout-orange);
+    }
+
+    /* Responsive */
+
+    @media (max-width: 1080px) {
+      .main-nav {
+        display: none;
+      }
+
+      .header-inner > .btn {
+        display: none;
+      }
+
+      .mobile-menu-button {
+        display: inline-flex;
+      }
+
+      .hero-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-copy {
+        text-align: center;
+      }
+
+      .hero-copy h1,
+      .hero-copy > p {
+        margin-right: auto;
+        margin-left: auto;
+      }
+
+      .hero-actions {
+        justify-content: center;
+      }
+
+      .hero-visual {
+        width: min(100%, 650px);
+        margin: 0 auto;
+      }
+
+      .day-flow {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 22px;
+      }
+
+      .day-step:nth-child(3)::after {
+        display: none;
+      }
+
+      .platform-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (max-width: 850px) {
+      .section {
+        padding: 78px 0;
+      }
+
+      .questions-grid,
+      .field-grid,
+      .story-card {
+        grid-template-columns: 1fr;
+      }
+
+      .questions-intro {
+        position: static;
+      }
+
+      .comparison-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .story-card {
+        gap: 44px;
+        padding: 52px 42px;
+      }
+
+      .cta-card {
+        grid-template-columns: 1fr;
+      }
+
+      .cta-card .btn {
+        justify-self: start;
+      }
+
+      .footer-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .footer-brand {
+        grid-column: 1 / -1;
+      }
+    }
+
+    @media (max-width: 680px) {
+      .container,
+      .narrow-container {
+        width: min(calc(100% - 28px), var(--container));
+      }
+
+      .hero {
+        padding: 40px 0 80px;
+      }
+
+      .hero-copy h1 {
+        font-size: clamp(2.75rem, 13vw, 4.6rem);
+      }
+
+      .hero-actions {
+        flex-direction: column;
+        gap: 18px;
+      }
+
+      .hero-actions .btn {
+        width: 100%;
+      }
+
+      .hero-visual {
+        min-height: 480px;
+      }
+
+      .crm-gap-card {
+        min-height: 465px;
+        padding: 38px 18px;
+      }
+
+      .flow-card {
+        grid-template-columns: 41px 1fr;
+        min-height: 75px;
+        padding: 12px 14px;
+      }
+
+      .flow-icon {
+        width: 38px;
+        height: 38px;
+      }
+
+      .flow-note {
+        right: 8px;
+        bottom: 10px;
+        max-width: 130px;
+        padding: 10px;
+        font-size: 0.95rem;
+      }
+
+      .belief-card {
+        padding: 38px 24px;
+      }
+
+      .field-moments {
+        grid-template-columns: 1fr;
+      }
+
+      .day-flow {
+        grid-template-columns: 1fr;
+      }
+
+      .day-step {
+        min-height: 0;
+      }
+
+      .day-step:not(:last-child)::after {
+        top: auto;
+        right: 50%;
+        bottom: -26px;
+        display: block;
+        content: "↓";
+        transform: translateX(50%);
+      }
+
+      .day-result {
+        grid-template-columns: 1fr;
+      }
+
+      .story-card {
+        padding: 40px 25px;
+      }
+
+      .platform-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .cta-card {
+        padding: 38px 25px;
+      }
+
+      .cta-card .btn {
+        width: 100%;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-brand {
+        grid-column: auto;
+      }
+    }
+
+    @media (max-width: 440px) {
+      .logo {
+        font-size: 1.7rem;
+      }
+
+      .platform-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="container">
+      <div class="header-inner">
+        <a class="logo" href="/index.html" aria-label="Scout homepage">
+          Scout
+        </a>
+
+        <nav class="main-nav" aria-label="Primary navigation">
+          <a href="/index.html#story">Why we built Scout</a>
+          <a href="/index.html#features">Features</a>
+          <a class="active" href="#top">Why Scout</a>
+          <a href="/index.html#audience">Who it’s for</a>
+          <a href="#early-access">Early access</a>
+        </nav>
+
+        <a class="btn btn-secondary" href="#early-access">
+          Request early access
+        </a>
+
+        <button
+          class="mobile-menu-button"
+          id="mobileMenuButton"
+          type="button"
+          aria-label="Open navigation"
+          aria-expanded="false"
+        >
+          <svg
+            width="22"
+            height="22"
+            viewBox="0 0 24 24"
+            fill="none"
+            aria-hidden="true"
+          >
+            <path
+              d="M4 7h16M4 12h16M4 17h16"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+            />
+          </svg>
+        </button>
+      </div>
+
+      <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
+        <a href="/index.html">Home</a>
+        <a href="/index.html#story">Why we built Scout</a>
+        <a href="/index.html#features">Features</a>
+        <a href="#top">Why Scout</a>
+        <a href="/index.html#audience">Who it’s for</a>
+        <a href="#early-access">Early access</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- Hero -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <p class="eyebrow">Built alongside your CRM</p>
+
+            <h1>
+              No, Scout isn't another CRM.
+              <span>It's the tool your CRM has been missing.</span>
+            </h1>
+
+            <p>
+              Salesforce, HubSpot, Microsoft Dynamics, and other CRMs are
+              incredibly powerful. We didn't build Scout because they failed.
+              We built Scout because outside sales happens between CRM updates.
+            </p>
+
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="#early-access">
+                Request early access
+              </a>
+
+              <a class="text-link" href="#why">
+                See where Scout fits
+                <span aria-hidden="true">→</span>
+              </a>
+            </div>
+          </div>
+
+          <div
+            class="hero-visual"
+            aria-label="Illustration showing Scout between customer activity and a CRM"
+          >
+            <div class="crm-gap-card">
+              <svg
+                class="mountain-lines"
+                viewBox="0 0 800 240"
+                fill="none"
+                aria-hidden="true"
+              >
+                <path
+                  d="M0 205L110 130l55 41 95-98 71 81 54-59 92 100 82-74 100 84"
+                  stroke="#314b43"
+                  stroke-width="3"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M42 205l92-57 32 24 95-99 33 36"
+                  stroke="#314b43"
+                  stroke-width="1.4"
+                  opacity=".6"
+                />
+                <path
+                  d="M386 195l57-65 34 31 78-72 40 47"
+                  stroke="#314b43"
+                  stroke-width="1.4"
+                  opacity=".6"
+                />
+              </svg>
+
+              <div class="flow">
+                <div class="flow-card">
+                  <span class="flow-icon">
+                    <svg
+                      width="22"
+                      height="22"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      aria-hidden="true"
+                    >
+                      <circle
+                        cx="12"
+                        cy="8"
+                        r="3.5"
+                        stroke="currentColor"
+                        stroke-width="1.7"
+                      />
+                      <path
+                        d="M5 20c.5-4 2.8-6 7-6s6.5 2 7 6"
+                        stroke="currentColor"
+                        stroke-width="1.7"
+                        stroke-linecap="round"
+                      />
+                    </svg>
+                  </span>
+
+                  <div>
+                    <strong>Customer relationship</strong>
+                    <span>Meetings, calls, promises, and opportunities</span>
+                  </div>
+                </div>
+
+                <div class="flow-arrow" aria-hidden="true">↓</div>
+
+                <div class="flow-card highlight">
+                  <span class="flow-icon">
+                    <svg
+                      width="22"
+                      height="22"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      aria-hidden="true"
+                    >
+                      <path
+                        d="M5 18l5-7 3 4 2-3 4 6H5z"
+                        stroke="currentColor"
+                        stroke-width="1.7"
+                        stroke-linejoin="round"
+                      />
+                      <path
+                        d="M14 7v6M14 7h5l-2 2 2 2h-5"
+                        stroke="currentColor"
+                        stroke-width="1.6"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  </span>
+
+                  <div>
+                    <strong>Scout</strong>
+                    <span>Your daily workspace for outside sales</span>
+                  </div>
+                </div>
+
+                <div class="flow-arrow" aria-hidden="true">↓</div>
+
+                <div class="flow-card">
+                  <span class="flow-icon">
+                    <svg
+                      width="22"
+                      height="22"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      aria-hidden="true"
+                    >
+                      <rect
+                        x="4"
+                        y="5"
+                        width="16"
+                        height="14"
+                        rx="3"
+                        stroke="currentColor"
+                        stroke-width="1.7"
+                      />
+                      <path
+                        d="M8 10h8M8 14h5"
+                        stroke="currentColor"
+                        stroke-width="1.7"
+                        stroke-linecap="round"
+                      />
+                    </svg>
+                  </span>
+
+                  <div>
+                    <strong>Your CRM</strong>
+                    <span>The system of record your company already trusts</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="flow-note">
+                Scout connects the work in the field to the systems back at the
+                office.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Belief -->
+    <section class="belief-section">
+      <div class="container">
+        <div class="belief-card">
+          <p>
+            “We believe every company should have a CRM.
+            <span>
+              We just don't think it should be where outside sales reps spend
+              their entire day.
+            </span>”
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CRM Questions -->
+    <section class="section section-soft" id="why">
+      <div class="container">
+        <div class="questions-grid">
+          <div class="questions-intro">
+            <p class="eyebrow">Two different kinds of questions</p>
+
+            <h2>
+              Great CRMs manage customer data.
+            </h2>
+
+            <p>
+              CRMs help companies understand their pipeline, forecast revenue,
+              maintain customer records, and give leadership visibility into
+              the business.
+            </p>
+
+            <div class="selling-questions">
+              <strong>Those are important questions.</strong>
+
+              <p>
+                But they aren't usually the questions an outside sales rep is
+                asking when the day begins.
+              </p>
+            </div>
+          </div>
+
+          <div class="question-list">
+            <article class="question-card">
+              <span class="question-number">1</span>
+              <p>How many opportunities are currently in the pipeline?</p>
+            </article>
+
+            <article class="question-card">
+              <span class="question-number">2</span>
+              <p>What is the sales forecast for this month or quarter?</p>
+            </article>
+
+            <article class="question-card">
+              <span class="question-number">3</span>
+              <p>What stage is each deal currently in?</p>
+            </article>
+
+            <article class="question-card">
+              <span class="question-number">4</span>
+              <p>Which accounts and opportunities need attention?</p>
+            </article>
+
+            <article class="question-card">
+              <span class="question-number">5</span>
+              <p>What does leadership need to know?</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Selling Questions -->
+    <section class="section">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">The questions reps ask</p>
+
+          <h2>Outside sales happens somewhere else.</h2>
+
+          <p>
+            Reps aren't only thinking about reports and dashboards. They're
+            trying to decide where to go, who to contact, what to remember, and
+            how to keep every opportunity moving forward.
+          </p>
+        </div>
+
+        <div class="questions-grid">
+          <div class="question-list">
+            <article class="question-card">
+              <span class="question-number">1</span>
+              <p>Who should I stop and see today?</p>
+            </article>
+
+            <article class="question-card">
+              <span class="question-number">2</span>
+              <p>What did we talk about the last time I was there?</p>
+            </article>
+
+            <article class="question-card">
+              <span class="question-number">3</span>
+              <p>Did I ever send that customer the quote I promised?</p>
+            </article>
+
+            <article class="question-card">
+              <span class="question-number">4</span>
+              <p>Who said they would call me back?</p>
+            </article>
+          </div>
+
+          <div class="question-list">
+            <article class="question-card">
+              <span class="question-number">5</span>
+              <p>Which customers haven't heard from me recently?</p>
+            </article>
+
+            <article class="question-card">
+              <span class="question-number">6</span>
+              <p>What opportunities am I closest to winning?</p>
+            </article>
+
+            <article class="question-card">
+              <span class="question-number">7</span>
+              <p>Where should I spend my time today?</p>
+            </article>
+
+            <article class="question-card">
+              <span class="question-number">8</span>
+              <p>What small step can I take to move this relationship forward?</p>
+            </article>
+          </div>
+        </div>
+
+        <div class="selling-questions" style="max-width: 760px; margin: 36px auto 0;">
+          <strong>Those aren't reporting questions.</strong>
+
+          <p>
+            Those are selling questions. That's where Scout comes in.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Comparison -->
+    <section class="section section-soft">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">Two different tools</p>
+
+          <h2>One shared goal.</h2>
+
+          <p>
+            Your CRM and Scout don't need to compete. Each tool can focus on
+            the work it was designed to do best.
+          </p>
+        </div>
+
+        <div class="comparison-grid">
+          <article class="comparison-card">
+            <span class="comparison-label">Your CRM</span>
+
+            <h3>The system of record</h3>
+
+            <p>
+              Your CRM gives the company a structured view of customers,
+              opportunities, activity, forecasts, and results.
+            </p>
+
+            <div class="comparison-list">
+              <div class="comparison-item">
+                <span class="comparison-check">✓</span>
+                <span>Customer database</span>
+              </div>
+
+              <div class="comparison-item">
+                <span class="comparison-check">✓</span>
+                <span>Company-wide visibility</span>
+              </div>
+
+              <div class="comparison-item">
+                <span class="comparison-check">✓</span>
+                <span>Revenue forecasting</span>
+              </div>
+
+              <div class="comparison-item">
+                <span class="comparison-check">✓</span>
+                <span>Pipeline reporting</span>
+              </div>
+
+              <div class="comparison-item">
+                <span class="comparison-check">✓</span>
+                <span>Opportunity tracking</span>
+              </div>
+
+              <div class="comparison-item">
+                <span class="comparison-check">✓</span>
+                <span>Management dashboards</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="comparison-card scout">
+            <span class="comparison-label">Scout</span>
+
+            <h3>The daily workspace</h3>
+
+            <p>
+              Scout helps outside sales professionals organize their territory,
+              remember conversations, and decide what to do next.
+            </p>
+
+            <div class="comparison-list">
+              <div class="comparison-item">
+                <span class="comparison-check">✓</span>
+                <span>Territory planning</span>
+              </div>
+
+              <div class="comparison-item">
+                <span class="comparison-check">✓</span>
+                <span>Customer visit preparation</span>
+              </div>
+
+              <div class="comparison-item">
+                <span class="comparison-check">✓</span>
+                <span>Notes and relationship history</span>
+              </div>
+
+              <div class="comparison-item">
+                <span class="comparison-check">✓</span>
+                <span>Follow-ups and daily priorities</span>
+              </div>
+
+              <div class="comparison-item">
+                <span class="comparison-check">✓</span>
+                <span>Opportunity development</span>
+              </div>
+
+              <div class="comparison-item">
+                <span class="comparison-check">✓</span>
+                <span>Daily field execution</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Outside Sales -->
+    <section class="section">
+      <div class="container">
+        <div class="field-grid">
+          <div class="field-copy">
+            <p class="eyebrow">Outside sales is different</p>
+
+            <h2>
+              We didn't build Scout because Salesforce wasn't good enough.
+            </h2>
+
+            <p>
+              We built Scout because outside sales happens on the road, between
+              appointments, on job sites, during phone calls, across a desk,
+              and inside dozens of small conversations.
+            </p>
+
+            <p>
+              Those moments deserve software built specifically for the people
+              doing the work.
+            </p>
+          </div>
+
+          <div class="field-moments">
+            <article class="moment-card">
+              <span class="moment-icon">
+                <svg
+                  width="22"
+                  height="22"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M4 15l2-6h12l2 6M5 15h14v4H5zM7 19v2M17 19v2"
+                    stroke="currentColor"
+                    stroke-width="1.7"
+                    stroke-linejoin="round"
+                    stroke-linecap="round"
+                  />
+                  <circle cx="8" cy="15" r="1" fill="currentColor" />
+                  <circle cx="16" cy="15" r="1" fill="currentColor" />
+                </svg>
+              </span>
+
+              <h3>On the road</h3>
+              <p>Planning visits and deciding where your time matters most.</p>
+            </article>
+
+            <article class="moment-card">
+              <span class="moment-icon">
+                <svg
+                  width="22"
+                  height="22"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M5 20V8l7-4 7 4v12M8 20v-6h8v6M9 10h1M14 10h1"
+                    stroke="currentColor"
+                    stroke-width="1.7"
+                    stroke-linejoin="round"
+                    stroke-linecap="round"
+                  />
+                </svg>
+              </span>
+
+              <h3>On job sites</h3>
+              <p>Capturing details while conversations are still fresh.</p>
+            </article>
+
+            <article class="moment-card">
+              <span class="moment-icon">
+                <svg
+                  width="22"
+                  height="22"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M6.5 4h3l1.5 4-2 1.5c1.3 2.7 2.8 4.2 5.5 5.5l1.5-2 4 1.5v3c0 1.1-.9 2-2 2C10.5 19.5 4.5 13.5 4.5 6c0-1.1.9-2 2-2z"
+                    stroke="currentColor"
+                    stroke-width="1.7"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </span>
+
+              <h3>During phone calls</h3>
+              <p>Remembering promises, questions, and the next follow-up.</p>
+            </article>
+
+            <article class="moment-card">
+              <span class="moment-icon">
+                <svg
+                  width="22"
+                  height="22"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M5 19l4.5-1 8-8-3.5-3.5-8 8L5 19zM13 7.5l3.5 3.5"
+                    stroke="currentColor"
+                    stroke-width="1.7"
+                    stroke-linejoin="round"
+                    stroke-linecap="round"
+                  />
+                </svg>
+              </span>
+
+              <h3>Between appointments</h3>
+              <p>Turning handwritten notes into clear next steps.</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Workflow -->
+    <section class="section section-soft">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">A more natural workflow</p>
+
+          <h2>Scout fills the gap between customer visits and your CRM.</h2>
+
+          <p>
+            Instead of trying to remember everything until the end of the day,
+            Scout gives your field activity a natural place to live.
+          </p>
+        </div>
+
+        <div class="day-flow">
+          <article class="day-step">
+            <span class="day-step-number">1</span>
+            <h3>Meet the customer</h3>
+            <p>Have the real conversation and understand what matters.</p>
+          </article>
+
+          <article class="day-step">
+            <span class="day-step-number">2</span>
+            <h3>Capture your notes</h3>
+            <p>Record the important details while they're still fresh.</p>
+          </article>
+
+          <article class="day-step">
+            <span class="day-step-number">3</span>
+            <h3>Create the follow-up</h3>
+            <p>Turn the conversation into a clear next action.</p>
+          </article>
+
+          <article class="day-step">
+            <span class="day-step-number">4</span>
+            <h3>Update the opportunity</h3>
+            <p>Keep the deal moving and organize the small victories.</p>
+          </article>
+
+          <article class="day-step scout-step">
+            <span class="day-step-number">5</span>
+            <h3>Scout organizes it</h3>
+            <p>Your territory, relationships, and priorities stay connected.</p>
+          </article>
+
+          <article class="day-step">
+            <span class="day-step-number">6</span>
+            <h3>Keep your CRM current</h3>
+            <p>Important information can flow back to the system of record.</p>
+          </article>
+        </div>
+
+        <div class="day-result">
+          <div class="result-card">
+            <span>Management</span> stays informed.
+          </div>
+
+          <div class="result-card">
+            The <span>sales rep</span> stays organized.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Founder Story -->
+    <section class="section">
+      <div class="container">
+        <div class="story-card">
+          <div class="story-quote">
+            <blockquote>
+              “I wasn't trying to build software. I was trying to
+              <span class="hand-underline">remember everything.</span>”
+            </blockquote>
+
+            <div class="founder-info">
+              <div class="founder-photo">JS</div>
+
+              <div>
+                <strong>Jeff Short</strong>
+                <span>Founder of Scout</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="story-copy">
+            <p>
+              Every customer conversation created another note. Every
+              opportunity created another follow-up. Every quote became another
+              reminder.
+            </p>
+
+            <p>
+              Every relationship depended on remembering dozens of small
+              details that never seemed to fit naturally inside a CRM.
+            </p>
+
+            <p>
+              The notebook got bigger. The sticky notes multiplied. The
+              spreadsheets grew.
+            </p>
+
+            <p>
+              Eventually, Scout became the system I wished I had on my first
+              day in outside sales.
+            </p>
+
+            <a class="text-link" href="/why-scout.html">
+              Read the full Scout story
+              <span aria-hidden="true">→</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quote -->
+    <section class="quote-section">
+      <div class="container">
+        <div class="big-quote">
+          <blockquote>
+            Your CRM manages customer data.
+            <span>Scout helps you build customer relationships.</span>
+          </blockquote>
+        </div>
+      </div>
+    </section>
+
+    <!-- Platforms -->
+    <section class="section section-soft">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">Keep the tools you already trust</p>
+
+          <h2>Scout was designed to work alongside your CRM.</h2>
+
+          <p>
+            If your business already relies on an established CRM, keep using
+            it. Scout gives outside sales professionals a specialized workspace
+            without forcing the company to abandon the systems it already
+            depends on.
+          </p>
+        </div>
+
+        <div class="platform-grid">
+          <div class="platform-card">Salesforce</div>
+          <div class="platform-card">HubSpot</div>
+          <div class="platform-card">Microsoft Dynamics</div>
+          <div class="platform-card">Zoho CRM</div>
+          <div class="platform-card">Pipedrive</div>
+        </div>
+
+        <p class="platform-note">
+          Scout is being designed to connect with the tools your business
+          already uses. Integration availability may vary during early access.
+        </p>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section" id="early-access">
+      <div class="container">
+        <div class="cta-card">
+          <div class="cta-copy">
+            <p class="eyebrow">Keep your CRM</p>
+
+            <h2>
+              Give your sales team the workspace
+              <span>they've been missing.</span>
+            </h2>
+
+            <p>
+              Scout helps organize territories, customer relationships,
+              opportunities, follow-ups, commissions, and daily sales activity
+              while your CRM continues serving as the system of record.
+            </p>
+          </div>
+
+          <a class="btn btn-primary" href="/index.html#early-access">
+            Request early access
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="logo" href="/index.html">
+            Scout
+          </a>
+
+          <p>Find. Build. <span>Grow.</span></p>
+        </div>
+
+        <div class="footer-column">
+          <h3>Product</h3>
+          <a href="/index.html#features">Features</a>
+          <a href="#top">Why Scout</a>
+          <a href="/index.html#early-access">Early access</a>
+        </div>
+
+        <div class="footer-column">
+          <h3>Company</h3>
+          <a href="/index.html#story">Why we built Scout</a>
+          <a href="/why-scout.html">Our story</a>
+        </div>
+
+        <div class="footer-column">
+          <h3>Legal</h3>
+          <a href="#">Privacy</a>
+          <a href="#">Terms</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const mobileMenuButton = document.getElementById("mobileMenuButton");
+    const mobileNav = document.getElementById("mobileNav");
+
+    mobileMenuButton.addEventListener("click", () => {
+      const isOpen = mobileNav.classList.toggle("open");
+
+      mobileMenuButton.setAttribute("aria-expanded", String(isOpen));
+    });
+
+    mobileNav.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        mobileNav.classList.remove("open");
+        mobileMenuButton.setAttribute("aria-expanded", "false");
+      });
+    });
+  </script>
+</body>
+</html>
