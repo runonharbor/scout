@@ -109,7 +109,7 @@
       color: var(--orange);
       font-size: 0.78rem;
       font-weight: 800;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.04em;
       text-transform: uppercase;
     }
 
@@ -123,7 +123,7 @@
       margin: 0;
       font-size: clamp(2.15rem, 4.3vw, 3.75rem);
       line-height: 1.06;
-      letter-spacing: -0.05em;
+      letter-spacing: -0.03em;
     }
 
     .section-heading p {
