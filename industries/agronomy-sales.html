@@ -1,0 +1,2744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Scout for Agronomy Sales | Territory Sales Software</title>
+
+  <meta
+    name="description"
+    content="Scout helps agronomy salespeople organize growers, fields, product recommendations, trial plots, seasonal follow-ups, opportunities, and territory visits."
+  >
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  >
+
+  <style>
+    :root {
+      --scout-green: #1f4d3f;
+      --field-green: #4f7354;
+      --leaf-green: #6f8f61;
+      --soft-green: #edf2e9;
+
+      --orange: #d65a1f;
+      --orange-dark: #b94a17;
+
+      --cream: #fcfbf7;
+      --warm-white: #fffefb;
+      --sand: #f5f1e8;
+      --field-paper: #f1efe4;
+      --white: #ffffff;
+
+      --charcoal: #1f2120;
+      --graphite: #5c625d;
+      --muted: #7a7f7b;
+
+      --border: #dfdfd6;
+      --soft-border: #ebe9e1;
+
+      --radius-small: 10px;
+      --radius-medium: 18px;
+      --radius-large: 28px;
+
+      --shadow:
+        0 18px 50px rgba(31, 33, 32, 0.06),
+        0 3px 12px rgba(31, 33, 32, 0.04);
+
+      --container: 1180px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      overflow-x: hidden;
+      background:
+        radial-gradient(
+          circle at 90% 2%,
+          rgba(79, 115, 84, 0.08),
+          transparent 28%
+        ),
+        var(--cream);
+      color: var(--charcoal);
+      font-family: "Inter", Arial, sans-serif;
+      line-height: 1.6;
+    }
+
+    img,
+    svg {
+      display: block;
+      max-width: 100%;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input,
+    textarea {
+      font: inherit;
+    }
+
+    .container {
+      width: min(calc(100% - 40px), var(--container));
+      margin: 0 auto;
+    }
+
+    .section {
+      padding: 105px 0;
+    }
+
+    .section-soft {
+      background: var(--sand);
+    }
+
+    .section-green {
+      background: var(--soft-green);
+    }
+
+    .eyebrow {
+      margin: 0 0 15px;
+      color: var(--orange);
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .section-heading {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .section-heading h2 {
+      margin: 0;
+      font-size: clamp(2.2rem, 4.3vw, 3.8rem);
+      line-height: 1.06;
+      letter-spacing: -0.052em;
+    }
+
+    .section-heading p {
+      max-width: 690px;
+      margin: 23px auto 0;
+      color: var(--graphite);
+      font-size: 1.04rem;
+      line-height: 1.82;
+    }
+
+    .btn {
+      display: inline-flex;
+      min-height: 51px;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      padding: 0 23px;
+      border: 1px solid transparent;
+      border-radius: 9px;
+      cursor: pointer;
+      font-weight: 700;
+      transition:
+        transform 160ms ease,
+        color 160ms ease,
+        background-color 160ms ease,
+        border-color 160ms ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .btn-primary {
+      background: var(--orange);
+      color: var(--white);
+    }
+
+    .btn-primary:hover {
+      background: var(--orange-dark);
+    }
+
+    .btn-secondary {
+      border-color: var(--orange);
+      background: transparent;
+      color: var(--orange);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(214, 90, 31, 0.06);
+    }
+
+    .text-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--scout-green);
+      font-weight: 700;
+      transition: color 160ms ease;
+    }
+
+    .text-link:hover {
+      color: var(--orange);
+    }
+
+    /* Header */
+
+    .site-header {
+      position: relative;
+      z-index: 20;
+      padding: 22px 0;
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 28px;
+    }
+
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
+      color: var(--scout-green);
+      font-size: 2rem;
+      font-weight: 800;
+      letter-spacing: -0.05em;
+    }
+
+    .logo-mark {
+      display: inline-flex;
+      width: 34px;
+      height: 34px;
+      align-items: center;
+      justify-content: center;
+      color: var(--orange);
+    }
+
+    .main-nav {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      color: #373a38;
+      font-size: 0.92rem;
+      font-weight: 600;
+    }
+
+    .main-nav a {
+      transition: color 150ms ease;
+    }
+
+    .main-nav a:hover,
+    .main-nav a.active {
+      color: var(--orange);
+    }
+
+    .mobile-menu-button {
+      display: none;
+      width: 44px;
+      height: 44px;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      background: var(--white);
+      color: var(--charcoal);
+      cursor: pointer;
+    }
+
+    .mobile-nav {
+      display: none;
+      padding: 13px 0 20px;
+    }
+
+    .mobile-nav.open {
+      display: grid;
+    }
+
+    .mobile-nav a {
+      padding: 13px 0;
+      border-bottom: 1px solid var(--border);
+      font-weight: 600;
+    }
+
+    /* Hero */
+
+    .hero {
+      padding: 65px 0 110px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.04fr) minmax(420px, 0.96fr);
+      gap: 70px;
+      align-items: center;
+    }
+
+    .hero-copy h1 {
+      max-width: 770px;
+      margin: 0;
+      font-size: clamp(3.15rem, 5.7vw, 5.9rem);
+      line-height: 0.98;
+      letter-spacing: -0.063em;
+    }
+
+    .hero-copy h1 span {
+      display: block;
+      margin-top: 19px;
+      color: var(--orange);
+      font-size: 0.63em;
+      line-height: 1.07;
+      letter-spacing: -0.044em;
+    }
+
+    .hero-copy > p {
+      max-width: 680px;
+      margin: 29px 0 0;
+      color: var(--graphite);
+      font-size: 1.1rem;
+      line-height: 1.82;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+      margin-top: 36px;
+    }
+
+    .hero-note {
+      max-width: 585px;
+      margin-top: 31px;
+      padding-left: 17px;
+      border-left: 3px solid var(--orange);
+      color: var(--graphite);
+      font-size: 0.9rem;
+      line-height: 1.67;
+    }
+
+    /* Field board */
+
+    .field-board {
+      position: relative;
+      min-height: 585px;
+      overflow: hidden;
+      padding: 32px;
+      border: 1px solid rgba(31, 77, 63, 0.1);
+      border-radius: 32px;
+      background: var(--field-paper);
+      box-shadow: var(--shadow);
+    }
+
+    .field-board::before {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(
+          circle at 50% 46%,
+          rgba(255, 255, 255, 0.92),
+          transparent 59%
+        );
+      content: "";
+    }
+
+    .field-lines {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0.34;
+    }
+
+    .field-label {
+      position: relative;
+      z-index: 4;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border: 1px solid var(--border);
+      border-radius: 30px;
+      background: rgba(255, 255, 255, 0.9);
+      color: var(--scout-green);
+      font-size: 0.73rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .grower-card {
+      position: absolute;
+      z-index: 4;
+      width: 265px;
+      padding: 18px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.97);
+      box-shadow: var(--shadow);
+    }
+
+    .grower-card.card-one {
+      top: 98px;
+      left: 27px;
+      transform: rotate(-1.1deg);
+    }
+
+    .grower-card.card-two {
+      top: 230px;
+      right: 24px;
+      transform: rotate(1.3deg);
+    }
+
+    .grower-card.card-three {
+      bottom: 39px;
+      left: 64px;
+      transform: rotate(-0.7deg);
+    }
+
+    .grower-card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .crop-icon {
+      display: inline-flex;
+      width: 43px;
+      height: 43px;
+      align-items: center;
+      justify-content: center;
+      border: 1.5px solid var(--field-green);
+      border-radius: 50%;
+      color: var(--field-green);
+    }
+
+    .status {
+      display: inline-flex;
+      min-height: 27px;
+      align-items: center;
+      padding: 0 9px;
+      border-radius: 20px;
+      background: rgba(214, 90, 31, 0.09);
+      color: var(--orange);
+      font-size: 0.65rem;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .grower-card h3 {
+      margin: 15px 0 0;
+      font-size: 0.94rem;
+      letter-spacing: -0.02em;
+    }
+
+    .grower-name {
+      margin: 4px 0 0;
+      color: var(--field-green);
+      font-size: 0.72rem;
+      font-weight: 700;
+    }
+
+    .grower-card p {
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-size: 0.75rem;
+      line-height: 1.55;
+    }
+
+    .grower-meta {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px solid var(--soft-border);
+      color: var(--graphite);
+      font-size: 0.67rem;
+      font-weight: 600;
+    }
+
+    .field-pin {
+      position: absolute;
+      z-index: 3;
+      width: 18px;
+      height: 18px;
+      border: 4px solid rgba(255, 255, 255, 0.92);
+      border-radius: 50%;
+      background: var(--orange);
+      box-shadow: 0 3px 9px rgba(31, 31, 31, 0.16);
+    }
+
+    .pin-one {
+      top: 192px;
+      left: 330px;
+    }
+
+    .pin-two {
+      right: 150px;
+      bottom: 130px;
+    }
+
+    .field-note {
+      position: absolute;
+      right: 18px;
+      bottom: 17px;
+      z-index: 5;
+      max-width: 170px;
+      padding: 13px 15px;
+      background: #fff0a8;
+      box-shadow: 0 7px 18px rgba(31, 31, 33, 0.13);
+      color: #514c38;
+      font-family: "Caveat", cursive;
+      font-size: 1.08rem;
+      line-height: 1.08;
+      transform: rotate(3deg);
+    }
+
+    /* Statement */
+
+    .statement-section {
+      padding: 10px 0 105px;
+    }
+
+    .statement-card {
+      max-width: 940px;
+      margin: 0 auto;
+      padding: 54px 60px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-large);
+      background: var(--white);
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+
+    .statement-card p {
+      margin: 0;
+      font-family: "Caveat", cursive;
+      font-size: clamp(2.15rem, 4.4vw, 3.8rem);
+      font-weight: 600;
+      line-height: 1.09;
+    }
+
+    .statement-card span {
+      color: var(--orange);
+    }
+
+    /* Pain cards */
+
+    .pain-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      margin-top: 58px;
+    }
+
+    .pain-card {
+      position: relative;
+      min-height: 235px;
+      overflow: hidden;
+      padding: 31px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-medium);
+      background: rgba(255, 255, 255, 0.84);
+    }
+
+    .pain-card::after {
+      position: absolute;
+      right: -42px;
+      bottom: -62px;
+      width: 155px;
+      height: 155px;
+      border: 1px solid rgba(79, 115, 84, 0.11);
+      border-radius: 50%;
+      content: "";
+    }
+
+    .pain-number {
+      display: inline-flex;
+      width: 42px;
+      height: 42px;
+      align-items: center;
+      justify-content: center;
+      border: 1.5px solid var(--orange);
+      border-radius: 50%;
+      color: var(--orange);
+      font-family: "Caveat", cursive;
+      font-size: 1.35rem;
+      font-weight: 700;
+    }
+
+    .pain-card h3 {
+      max-width: 490px;
+      margin: 21px 0 0;
+      font-size: 1.22rem;
+      line-height: 1.43;
+      letter-spacing: -0.025em;
+    }
+
+    .pain-card p {
+      max-width: 500px;
+      margin: 13px 0 0;
+      color: var(--graphite);
+      font-size: 0.9rem;
+      line-height: 1.7;
+    }
+
+    /* Features */
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 19px;
+      margin-top: 59px;
+    }
+
+    .feature-card {
+      min-height: 238px;
+      padding: 29px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-medium);
+      background: var(--white);
+      box-shadow: 0 8px 25px rgba(31, 31, 33, 0.025);
+      transition:
+        transform 170ms ease,
+        box-shadow 170ms ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow);
+    }
+
+    .feature-icon {
+      display: inline-flex;
+      width: 48px;
+      height: 48px;
+      align-items: center;
+      justify-content: center;
+      border: 1.5px solid var(--field-green);
+      border-radius: 50%;
+      color: var(--field-green);
+    }
+
+    .feature-card:nth-child(3n + 2) .feature-icon {
+      border-color: var(--orange);
+      color: var(--orange);
+    }
+
+    .feature-card h3 {
+      margin: 21px 0 0;
+      font-size: 1.03rem;
+      letter-spacing: -0.02em;
+    }
+
+    .feature-card p {
+      margin: 11px 0 0;
+      color: var(--graphite);
+      font-size: 0.86rem;
+      line-height: 1.7;
+    }
+
+    /* Seasonal timeline */
+
+    .season-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 14px;
+      margin-top: 61px;
+    }
+
+    .season-card {
+      position: relative;
+      min-height: 260px;
+      padding: 27px 20px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-medium);
+      background: var(--white);
+      text-align: center;
+    }
+
+    .season-card:not(:last-child)::after {
+      position: absolute;
+      top: 50%;
+      right: -21px;
+      z-index: 3;
+      color: var(--orange);
+      content: "→";
+      font-size: 1.3rem;
+      font-weight: 800;
+      transform: translateY(-50%);
+    }
+
+    .season-label {
+      display: inline-flex;
+      min-height: 30px;
+      align-items: center;
+      padding: 0 11px;
+      border-radius: 30px;
+      background: rgba(79, 115, 84, 0.09);
+      color: var(--field-green);
+      font-size: 0.68rem;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .season-icon {
+      display: flex;
+      width: 51px;
+      height: 51px;
+      align-items: center;
+      justify-content: center;
+      margin: 22px auto 0;
+      border: 1.5px solid var(--orange);
+      border-radius: 50%;
+      color: var(--orange);
+    }
+
+    .season-card h3 {
+      margin: 18px 0 0;
+      font-size: 1rem;
+    }
+
+    .season-card p {
+      margin: 10px 0 0;
+      color: var(--muted);
+      font-size: 0.77rem;
+      line-height: 1.58;
+    }
+
+    /* Opportunity examples */
+
+    .example-layout {
+      display: grid;
+      grid-template-columns: 0.77fr 1.23fr;
+      gap: 75px;
+      align-items: start;
+      margin-top: 63px;
+    }
+
+    .example-intro {
+      position: sticky;
+      top: 40px;
+    }
+
+    .example-intro h2 {
+      margin: 0;
+      font-size: clamp(2.15rem, 4vw, 3.55rem);
+      line-height: 1.07;
+      letter-spacing: -0.05em;
+    }
+
+    .example-intro p {
+      margin: 23px 0 0;
+      color: var(--graphite);
+      font-size: 1.02rem;
+      line-height: 1.82;
+    }
+
+    .example-list {
+      display: grid;
+      gap: 17px;
+    }
+
+    .example-card {
+      padding: 28px 29px;
+      border: 1px solid var(--border);
+      border-radius: 17px;
+      background: var(--white);
+      box-shadow: 0 7px 24px rgba(31, 31, 33, 0.025);
+    }
+
+    .example-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .example-card h3 {
+      margin: 0;
+      font-size: 1.03rem;
+    }
+
+    .example-type {
+      flex: 0 0 auto;
+      padding: 5px 9px;
+      border-radius: 20px;
+      background: rgba(79, 115, 84, 0.09);
+      color: var(--field-green);
+      font-size: 0.64rem;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .example-card p {
+      margin: 12px 0 0;
+      color: var(--graphite);
+      font-size: 0.89rem;
+      line-height: 1.7;
+    }
+
+    .example-footer {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 19px;
+    }
+
+    .example-detail {
+      padding: 7px 10px;
+      border: 1px solid var(--soft-border);
+      border-radius: 8px;
+      color: var(--muted);
+      font-size: 0.71rem;
+      font-weight: 600;
+    }
+
+    /* Relationship section */
+
+    .relationship-card {
+      display: grid;
+      grid-template-columns: 0.86fr 1.14fr;
+      gap: 72px;
+      align-items: center;
+      padding: 69px 75px;
+      border-radius: var(--radius-large);
+      background:
+        radial-gradient(
+          circle at 8% 12%,
+          rgba(214, 90, 31, 0.065),
+          transparent 32%
+        ),
+        var(--soft-green);
+    }
+
+    .relationship-quote blockquote {
+      margin: 0;
+      font-family: "Caveat", cursive;
+      font-size: clamp(2.2rem, 4vw, 3.8rem);
+      font-weight: 600;
+      line-height: 1.06;
+    }
+
+    .hand-underline {
+      position: relative;
+      display: inline-block;
+    }
+
+    .hand-underline::after {
+      position: absolute;
+      right: -3px;
+      bottom: -7px;
+      left: -3px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--orange);
+      content: "";
+      transform: rotate(-1deg);
+    }
+
+    .relationship-copy p {
+      margin: 0 0 20px;
+      color: #424944;
+      font-size: 1.03rem;
+      line-height: 1.86;
+    }
+
+    /* Results */
+
+    .results-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      margin-top: 56px;
+    }
+
+    .result-card {
+      padding: 31px 25px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-medium);
+      background: rgba(255, 255, 255, 0.83);
+      text-align: center;
+    }
+
+    .result-card strong {
+      display: block;
+      color: var(--orange);
+      font-family: "Caveat", cursive;
+      font-size: 2.3rem;
+      line-height: 1;
+    }
+
+    .result-card h3 {
+      margin: 15px 0 0;
+      font-size: 0.95rem;
+    }
+
+    .result-card p {
+      margin: 9px 0 0;
+      color: var(--muted);
+      font-size: 0.78rem;
+      line-height: 1.55;
+    }
+
+    /* CRM */
+
+    .crm-card {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+      align-items: center;
+      margin-top: 57px;
+      padding: 52px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-large);
+      background: var(--white);
+      box-shadow: var(--shadow);
+    }
+
+    .crm-copy h3 {
+      margin: 0;
+      font-size: clamp(1.8rem, 3vw, 2.75rem);
+      line-height: 1.1;
+      letter-spacing: -0.04em;
+    }
+
+    .crm-copy p {
+      margin: 20px 0 0;
+      color: var(--graphite);
+      line-height: 1.8;
+    }
+
+    .crm-flow {
+      display: grid;
+      gap: 14px;
+    }
+
+    .crm-flow-item {
+      display: grid;
+      grid-template-columns: 42px 1fr;
+      gap: 14px;
+      align-items: center;
+      min-height: 74px;
+      padding: 13px 16px;
+      border: 1px solid var(--soft-border);
+      border-radius: 13px;
+      background: #fdfcf9;
+    }
+
+    .crm-flow-item.scout {
+      border: 2px solid var(--orange);
+      background: #fffaf6;
+      transform: rotate(-0.5deg);
+    }
+
+    .crm-flow-icon {
+      display: flex;
+      width: 39px;
+      height: 39px;
+      align-items: center;
+      justify-content: center;
+      border: 1.5px solid var(--field-green);
+      border-radius: 50%;
+      color: var(--field-green);
+    }
+
+    .crm-flow-item.scout .crm-flow-icon {
+      border-color: var(--orange);
+      color: var(--orange);
+    }
+
+    .crm-flow-item strong {
+      display: block;
+      font-size: 0.9rem;
+    }
+
+    .crm-flow-item span {
+      display: block;
+      margin-top: 2px;
+      color: var(--muted);
+      font-size: 0.72rem;
+    }
+
+    /* Quote */
+
+    .quote-section {
+      padding: 120px 0;
+    }
+
+    .big-quote {
+      max-width: 990px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .big-quote blockquote {
+      margin: 0;
+      font-family: "Caveat", cursive;
+      font-size: clamp(2.9rem, 6vw, 5.9rem);
+      font-weight: 600;
+      line-height: 1.01;
+      letter-spacing: -0.025em;
+    }
+
+    .big-quote span {
+      display: block;
+      margin-top: 24px;
+      color: var(--orange);
+    }
+
+    /* CTA */
+
+    .cta-section {
+      padding: 30px 0 75px;
+    }
+
+    .cta-card {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 50px;
+      align-items: center;
+      padding: 57px 60px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-large);
+      background:
+        radial-gradient(
+          circle at 8% 20%,
+          rgba(79, 115, 84, 0.1),
+          transparent 34%
+        ),
+        var(--sand);
+    }
+
+    .cta-copy h2 {
+      max-width: 760px;
+      margin: 0;
+      font-size: clamp(2.15rem, 4vw, 3.65rem);
+      line-height: 1.06;
+      letter-spacing: -0.05em;
+    }
+
+    .cta-copy h2 span {
+      display: block;
+      margin-top: 9px;
+      color: var(--orange);
+    }
+
+    .cta-copy p {
+      max-width: 690px;
+      margin: 19px 0 0;
+      color: var(--graphite);
+      line-height: 1.78;
+    }
+
+    /* Footer */
+
+    .site-footer {
+      padding: 43px 0 55px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.8fr repeat(3, 1fr);
+      gap: 45px;
+      align-items: start;
+    }
+
+    .footer-brand p {
+      margin: 11px 0 0;
+      color: var(--graphite);
+      font-size: 0.84rem;
+    }
+
+    .footer-brand p span {
+      color: var(--orange);
+    }
+
+    .footer-column h3 {
+      margin: 0 0 14px;
+      font-size: 0.81rem;
+    }
+
+    .footer-column a {
+      display: block;
+      margin: 8px 0;
+      color: var(--graphite);
+      font-size: 0.81rem;
+    }
+
+    .footer-column a:hover {
+      color: var(--orange);
+    }
+
+    /* Responsive */
+
+    @media (max-width: 1080px) {
+      .main-nav {
+        display: none;
+      }
+
+      .header-inner > .btn {
+        display: none;
+      }
+
+      .mobile-menu-button {
+        display: inline-flex;
+      }
+
+      .hero-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-copy {
+        text-align: center;
+      }
+
+      .hero-copy h1,
+      .hero-copy > p,
+      .hero-note {
+        margin-right: auto;
+        margin-left: auto;
+      }
+
+      .hero-actions {
+        justify-content: center;
+      }
+
+      .field-board {
+        width: min(100%, 690px);
+        margin: 0 auto;
+      }
+
+      .feature-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .season-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+      }
+
+      .season-card:nth-child(3)::after {
+        display: none;
+      }
+
+      .results-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 860px) {
+      .section {
+        padding: 80px 0;
+      }
+
+      .example-layout,
+      .relationship-card,
+      .crm-card {
+        grid-template-columns: 1fr;
+      }
+
+      .example-intro {
+        position: static;
+      }
+
+      .relationship-card {
+        gap: 43px;
+        padding: 52px 42px;
+      }
+
+      .cta-card {
+        grid-template-columns: 1fr;
+      }
+
+      .cta-card .btn {
+        justify-self: start;
+      }
+
+      .footer-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .footer-brand {
+        grid-column: 1 / -1;
+      }
+    }
+
+    @media (max-width: 680px) {
+      .container {
+        width: min(calc(100% - 28px), var(--container));
+      }
+
+      .hero {
+        padding: 40px 0 80px;
+      }
+
+      .hero-copy h1 {
+        font-size: clamp(2.75rem, 13vw, 4.7rem);
+      }
+
+      .hero-actions {
+        flex-direction: column;
+        gap: 18px;
+      }
+
+      .hero-actions .btn {
+        width: 100%;
+      }
+
+      .field-board {
+        min-height: 650px;
+        padding: 25px 17px;
+      }
+
+      .grower-card {
+        position: relative;
+        top: auto !important;
+        right: auto !important;
+        bottom: auto !important;
+        left: auto !important;
+        width: 100%;
+        margin-top: 18px;
+        transform: none !important;
+      }
+
+      .field-pin,
+      .field-note {
+        display: none;
+      }
+
+      .statement-card {
+        padding: 40px 24px;
+      }
+
+      .pain-grid,
+      .feature-grid,
+      .results-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .pain-card {
+        min-height: 0;
+      }
+
+      .season-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .season-card {
+        min-height: 0;
+      }
+
+      .season-card:not(:last-child)::after {
+        top: auto;
+        right: 50%;
+        bottom: -28px;
+        display: block;
+        content: "↓";
+        transform: translateX(50%);
+      }
+
+      .relationship-card,
+      .crm-card,
+      .cta-card {
+        padding: 40px 25px;
+      }
+
+      .cta-card .btn {
+        width: 100%;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-brand {
+        grid-column: auto;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="container">
+      <div class="header-inner">
+        <a
+          class="logo"
+          href="/index.html"
+          aria-label="Scout homepage"
+        >
+          <span class="logo-mark">
+            <svg
+              width="34"
+              height="34"
+              viewBox="0 0 34 34"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M4 27l8-11 5 6 4-6 9 11H4z"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linejoin="round"
+              />
+
+              <path
+                d="M19 7v12M19 7h8l-3 3 3 3h-8"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </span>
+
+          Scout
+        </a>
+
+        <nav class="main-nav" aria-label="Primary navigation">
+          <a href="/index.html#story">Why we built Scout</a>
+          <a href="/index.html#features">Features</a>
+          <a class="active" href="/industries/">Industries</a>
+          <a href="/works-with-your-crm.html">Works with your CRM</a>
+          <a href="#early-access">Early access</a>
+        </nav>
+
+        <a class="btn btn-secondary" href="#early-access">
+          Request early access
+        </a>
+
+        <button
+          class="mobile-menu-button"
+          id="mobileMenuButton"
+          type="button"
+          aria-label="Open navigation"
+          aria-expanded="false"
+        >
+          <svg
+            width="22"
+            height="22"
+            viewBox="0 0 24 24"
+            fill="none"
+            aria-hidden="true"
+          >
+            <path
+              d="M4 7h16M4 12h16M4 17h16"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+            />
+          </svg>
+        </button>
+      </div>
+
+      <nav
+        class="mobile-nav"
+        id="mobileNav"
+        aria-label="Mobile navigation"
+      >
+        <a href="/index.html">Home</a>
+        <a href="/index.html#story">Why we built Scout</a>
+        <a href="/index.html#features">Features</a>
+        <a href="/industries/">Industries</a>
+        <a href="/works-with-your-crm.html">Works with your CRM</a>
+        <a href="#early-access">Early access</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- Hero -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <p class="eyebrow">
+              Scout for agronomy sales
+            </p>
+
+            <h1>
+              Your territory changes with every season.
+
+              <span>
+                Keep every grower, field, recommendation, trial, and
+                follow-up organized.
+              </span>
+            </h1>
+
+            <p>
+              Agronomy sales does not happen through one quote or one
+              conversation. It happens through farm visits, crop plans,
+              product trials, planting decisions, in-season
+              recommendations, harvest reviews, and years of earned
+              trust.
+            </p>
+
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="#early-access">
+                Request early access
+              </a>
+
+              <a class="text-link" href="#how-it-works">
+                See how Scout fits
+                <span aria-hidden="true">→</span>
+              </a>
+            </div>
+
+            <p class="hero-note">
+              Scout gives agronomy salespeople one place to organize the
+              relationships, fields, opportunities, and seasonal details
+              spread across their territory.
+            </p>
+          </div>
+
+          <div
+            class="field-board"
+            aria-label="Agronomy territory and grower opportunities"
+          >
+            <svg
+              class="field-lines"
+              viewBox="0 0 600 600"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M-40 90C130 15 165 80 330 26C455-15 535 38 660 8"
+                stroke="#4f7354"
+                stroke-width="2"
+              />
+
+              <path
+                d="M-35 130C115 65 188 135 336 72C455 22 565 83 650 42"
+                stroke="#4f7354"
+                stroke-width="2"
+              />
+
+              <path
+                d="M-30 180C102 112 207 190 340 125C464 65 558 129 650 91"
+                stroke="#4f7354"
+                stroke-width="2"
+              />
+
+              <path
+                d="M-20 235C115 165 201 241 345 180C465 129 555 181 645 145"
+                stroke="#4f7354"
+                stroke-width="2"
+              />
+
+              <path
+                d="M-30 300C92 233 220 306 351 241C475 180 558 247 650 206"
+                stroke="#4f7354"
+                stroke-width="2"
+              />
+
+              <path
+                d="M-30 365C110 302 210 371 350 311C469 260 558 319 650 274"
+                stroke="#4f7354"
+                stroke-width="2"
+              />
+
+              <path
+                d="M-25 430C108 365 211 437 353 378C479 326 562 381 650 342"
+                stroke="#4f7354"
+                stroke-width="2"
+              />
+
+              <path
+                d="M-30 500C112 431 206 503 352 447C468 403 560 451 650 414"
+                stroke="#4f7354"
+                stroke-width="2"
+              />
+
+              <path
+                d="M-30 566C104 498 220 570 355 516C478 467 559 520 650 481"
+                stroke="#4f7354"
+                stroke-width="2"
+              />
+            </svg>
+
+            <div class="field-label">
+              <span>●</span>
+              North Central Territory
+            </div>
+
+            <article class="grower-card card-one">
+              <div class="grower-card-top">
+                <span class="crop-icon">
+                  <svg
+                    width="23"
+                    height="23"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M12 21V5M12 8C9 8 7 6 7 3c3 0 5 2 5 5ZM12 12c3 0 5-2 5-5-3 0-5 2-5 5ZM12 15c-3 0-5-2-5-5 3 0 5 2 5 5ZM12 18c3 0 5-2 5-5-3 0-5 2-5 5Z"
+                      stroke="currentColor"
+                      stroke-width="1.6"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </span>
+
+                <span class="status">Trial</span>
+              </div>
+
+              <h3>Corn hybrid trial</h3>
+              <p class="grower-name">Beck Family Farms</p>
+
+              <p>
+                New hybrid planted on 120 acres. Follow up after
+                emergence and again before tasseling.
+              </p>
+
+              <div class="grower-meta">
+                <span>Next visit: May 28</span>
+                <span>Growing</span>
+              </div>
+            </article>
+
+            <article class="grower-card card-two">
+              <div class="grower-card-top">
+                <span class="crop-icon">
+                  <svg
+                    width="23"
+                    height="23"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M12 20c0-7 2-11 7-14-1 6-3 10-7 14ZM12 20C11 13 8 9 4 7c1 6 4 10 8 13Z"
+                      stroke="currentColor"
+                      stroke-width="1.7"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+
+                    <path
+                      d="M12 20v-8"
+                      stroke="currentColor"
+                      stroke-width="1.7"
+                      stroke-linecap="round"
+                    />
+                  </svg>
+                </span>
+
+                <span class="status">Recommendation</span>
+              </div>
+
+              <h3>Nitrogen program review</h3>
+              <p class="grower-name">Johnson Farms</p>
+
+              <p>
+                Review sidedress options before the next field visit.
+                Customer asked about stabilizer pricing.
+              </p>
+
+              <div class="grower-meta">
+                <span>Follow up: Tuesday</span>
+                <span>Active</span>
+              </div>
+            </article>
+
+            <article class="grower-card card-three">
+              <div class="grower-card-top">
+                <span class="crop-icon">
+                  <svg
+                    width="23"
+                    height="23"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M5 20h14M7 20V8l5-4 5 4v12M10 12h4M10 16h4"
+                      stroke="currentColor"
+                      stroke-width="1.7"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </span>
+
+                <span class="status">Booking</span>
+              </div>
+
+              <h3>Fall seed booking</h3>
+              <p class="grower-name">Smith Family Farms</p>
+
+              <p>
+                Customer plans to review seed options after harvest.
+                Potential opportunity covers approximately 620 acres.
+              </p>
+
+              <div class="grower-meta">
+                <span>Call: October</span>
+                <span>Future</span>
+              </div>
+            </article>
+
+            <span class="field-pin pin-one"></span>
+            <span class="field-pin pin-two"></span>
+
+            <div class="field-note">
+              The best follow-up often starts with something the grower
+              mentioned months ago.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Statement -->
+    <section class="statement-section">
+      <div class="container">
+        <div class="statement-card">
+          <p>
+            “Agronomy isn't about making one sale.
+
+            <span>
+              It's about earning the opportunity to help again next
+              season.
+            </span>”
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pain points -->
+    <section class="section section-soft">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">Does this sound familiar?</p>
+
+          <h2>
+            A growing season creates hundreds of details worth
+            remembering.
+          </h2>
+
+          <p>
+            The product recommendation may only take a few minutes. The
+            trust behind that recommendation may have taken years to
+            build.
+          </p>
+        </div>
+
+        <div class="pain-grid">
+          <article class="pain-card">
+            <span class="pain-number">1</span>
+
+            <h3>
+              “I know they wanted to try that hybrid, but which field was
+              it?”
+            </h3>
+
+            <p>
+              The conversation happened months ago, and the detail is
+              buried somewhere in a notebook, text message, or email.
+            </p>
+          </article>
+
+          <article class="pain-card">
+            <span class="pain-number">2</span>
+
+            <h3>
+              “The grower mentioned changing chemistry, but I forgot to
+              write it down.”
+            </h3>
+
+            <p>
+              By the time the next visit arrives, the context behind the
+              conversation has already faded.
+            </p>
+          </article>
+
+          <article class="pain-card">
+            <span class="pain-number">3</span>
+
+            <h3>
+              “I drove right past one of my best customers and realized
+              it too late.”
+            </h3>
+
+            <p>
+              You were already nearby, but there was no easy way to see
+              which relationships deserved a quick stop.
+            </p>
+          </article>
+
+          <article class="pain-card">
+            <span class="pain-number">4</span>
+
+            <h3>
+              “Who did I promise to call once harvest was finished?”
+            </h3>
+
+            <p>
+              Seasonal promises are easy to make and difficult to
+              remember when dozens of customers enter harvest at
+              different times.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features -->
+    <section class="section" id="how-it-works">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">Built around agronomy sales</p>
+
+          <h2>
+            Organize more than a customer list.
+          </h2>
+
+          <p>
+            Scout helps you connect growers, fields, recommendations,
+            trials, seasonal opportunities, and next steps across your
+            territory.
+          </p>
+        </div>
+
+        <div class="feature-grid">
+          <article class="feature-card">
+            <span class="feature-icon">
+              <svg
+                width="23"
+                height="23"
+                viewBox="0 0 24 24"
+                fill="none"
+                aria-hidden="true"
+              >
+                <circle
+                  cx="12"
+                  cy="8"
+                  r="3.5"
+                  stroke="currentColor"
+                  stroke-width="1.7"
+                />
+
+                <path
+                  d="M5 20c.5-4 2.8-6 7-6s6.5 2 7 6"
+                  stroke="currentColor"
+                  stroke-width="1.7"
+                  stroke-linecap="round"
+                />
+              </svg>
+            </span>
+
+            <h3>Growers and relationships</h3>
+
+            <p>
+              Keep farm contacts, decision-makers, family relationships,
+              communication history, and personal details connected.
+            </p>
+          </article>
+
+          <article class="feature-card">
+            <span class="feature-icon">
+              <svg
+                width="23"
+                height="23"
+                viewBox="0 0 24 24"
+                fill="none"
+                aria-hidden="true"
+              >
+                <path
+                  d="M4 7l5-2 6 2 5-2v12l-5 2-6-2-5 2V7Z"
+                  stroke="currentColor"
+                  stroke-width="1.7"
+                  stroke-linejoin="round"
+                />
+
+                <path
+                  d="M9 5v12M15 7v12"
+                  stroke="currentColor"
+                  stroke-width="1.7"
+                />
+              </svg>
+            </span>
+
+            <h3>Fields and acres</h3>
+
+            <p>
+              Track field names, approximate acres, crop history,
+              locations, products used, and details discussed during
+              visits.
+            </p>
+          </article>
+
+          <article class="feature-card">
+            <span class="feature-icon">
+              <svg
+                width="23"
+                height="23"
+                viewBox="0 0 24 24"
+                fill="none"
+                aria-hidden="true"
+              >
+                <path
+                  d="M5 19V5h14v14H5ZM8 9h8M8 13h5"
+                  stroke="currentColor"
+                  stroke-width="1.7"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </span>
+
+            <h3>Product recommendations</h3>
+
+            <p>
+              Connect seed, fertility, crop protection, biological, and
+              specialty-product recommendations to the right grower and
+              field.
+            </p>
+          </article>
+
+          <article class="feature-card">
+            <span class="feature-icon">
+              <svg
+                width="23"
+                height="23"
+                viewBox="0 0 24 24"
+                fill="none"
+                aria-hidden="true"
+              >
+                <path
+                  d="M12 21V6M12 10c-3 0-5-2-5-5 3 0 5 2 5 5ZM12 14c3 0 5-2 5-5-3 0-5 2-5 5Z"
+                  stroke="currentColor"
+                  stroke-width="1.7"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </span>
+
+            <h3>Trial plots</h3>
+
+            <p>
+              Remember what was planted, where it was planted, what the
+              grower expected, and when performance should be reviewed.
+            </p>
+          </article>
+
+          <article class="feature-card">
+            <span class="feature-icon">
+              <svg
+                width="23"
+                height="23"
+                viewBox="0 0 24 24"
+                fill="none"
+                aria-hidden="true"
+              >
+                <path
+                  d="M5 7h14M7 4v6M17 4v6M5 10v9h14v-9"
+                  stroke="currentColor"
+                  stroke-width="1.7"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+
+                <path
+                  d="M8 14h3M8 17h6"
+                  stroke="currentColor"
+                  stroke-width="1.7"
+                  stroke-linecap="round"
+                />
+              </svg>
+            </span>
+
+            <h3>Seasonal follow-ups</h3>
+
+            <p>
+              Schedule the calls and visits that need to happen before
+              planting, spraying, tasseling, harvest, booking, and
+              prepay.
+            </p>
+          </article>
+
+          <article class="feature-card">
+            <span class="feature-icon">
+              <svg
+                width="23"
+                height="23"
+                viewBox="0 0 24 24"
+                fill="none"
+                aria-hidden="true"
+              >
+                <path
+                  d="M12 21s6-5 6-11a6 6 0 1 0-12 0c0 6 6 11 6 11Z"
+                  stroke="currentColor"
+                  stroke-width="1.7"
+                  stroke-linejoin="round"
+                />
+
+                <circle
+                  cx="12"
+                  cy="10"
+                  r="2"
+                  stroke="currentColor"
+                  stroke-width="1.7"
+                />
+              </svg>
+            </span>
+
+            <h3>Territory visits</h3>
+
+            <p>
+              See who you have visited recently, who you have not seen,
+              and which growers are located near today's route.
+            </p>
+          </article>
+
+          <article class="feature-card">
+            <span class="feature-icon">
+              <svg
+                width="23"
+                height="23"
+                viewBox="0 0 24 24"
+                fill="none"
+                aria-hidden="true"
+              >
+                <path
+                  d="M4 18l5-5 4 3 7-8"
+                  stroke="currentColor"
+                  stroke-width="1.7"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+
+                <path
+                  d="M16 8h4v4"
+                  stroke="currentColor"
+                  stroke-width="1.7"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </span>
+
+            <h3>Bookings and opportunities</h3>
+
+            <p>
+              Track prepay programs, seed bookings, product proposals,
+              acres under discussion, expected timing, and next steps.
+            </p>
+          </article>
+
+          <article class="feature-card">
+            <span class="feature-icon">
+              <svg
+                width="23"
+                height="23"
+                viewBox="0 0 24 24"
+                fill="none"
+                aria-hidden="true"
+              >
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="8"
+                  stroke="currentColor"
+                  stroke-width="1.7"
+                />
+
+                <path
+                  d="M9.5 9.5c.5-1 1.4-1.5 2.7-1.5 1.5 0 2.5.8 2.5 2 0 3-5.3 1.2-5.3 4 0 1.2 1 2 2.7 2 1.4 0 2.4-.6 2.9-1.7M12 6.5v11"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                />
+              </svg>
+            </span>
+
+            <h3>Sales and commissions</h3>
+
+            <p>
+              Understand the potential value of your territory and see
+              how open opportunities could contribute to your goals.
+            </p>
+          </article>
+
+          <article class="feature-card">
+            <span class="feature-icon">
+              <svg
+                width="23"
+                height="23"
+                viewBox="0 0 24 24"
+                fill="none"
+                aria-hidden="true"
+              >
+                <path
+                  d="M5 19l4.5-1 8-8-3.5-3.5-8 8L5 19Z"
+                  stroke="currentColor"
+                  stroke-width="1.7"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+
+                <path
+                  d="M13 7.5l3.5 3.5"
+                  stroke="currentColor"
+                  stroke-width="1.7"
+                  stroke-linecap="round"
+                />
+              </svg>
+            </span>
+
+            <h3>Notes that remain useful</h3>
+
+            <p>
+              Capture what you learned while it is fresh and connect
+              every note to the right grower, field, and opportunity.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Seasonal workflow -->
+    <section class="section section-green">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">Built around the agronomy calendar</p>
+
+          <h2>
+            The work changes throughout the year. Your relationships
+            continue through every season.
+          </h2>
+
+          <p>
+            Scout helps you keep plans, conversations, recommendations,
+            and follow-ups connected as the territory moves from winter
+            planning through harvest and back again.
+          </p>
+        </div>
+
+        <div class="season-grid">
+          <article class="season-card">
+            <span class="season-label">Winter</span>
+
+            <span class="season-icon">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                aria-hidden="true"
+              >
+                <path
+                  d="M12 3v18M4.2 7.5l15.6 9M4.2 16.5l15.6-9M8 5l4 2 4-2M8 19l4-2 4 2"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </span>
+
+            <h3>Planning</h3>
+
+            <p>
+              Seed bookings, crop plans, forecasts, programs, pricing,
+              prepay, and grower meetings.
+            </p>
+          </article>
+
+          <article class="season-card">
+            <span class="season-label">Spring</span>
+
+            <span class="season-icon">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                aria-hidden="true"
+              >
+                <path
+                  d="M12 21V10M12 14c-4 0-6-3-6-7 4 0 6 3 6 7ZM12 17c4 0 6-3 6-7-4 0-6 3-6 7Z"
+                  stroke="currentColor"
+                  stroke-width="1.7"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </span>
+
+            <h3>Planting</h3>
+
+            <p>
+              Field plans, product delivery, planting progress, weather
+              delays, emergence checks, and early visits.
+            </p>
+          </article>
+
+          <article class="season-card">
+            <span class="season-label">Summer</span>
+
+            <span class="season-icon">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                aria-hidden="true"
+              >
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="4"
+                  stroke="currentColor"
+                  stroke-width="1.7"
+                />
+
+                <path
+                  d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9 7 7M17 17l2.1 2.1M19.1 4.9 17 7M7 17l-2.1 2.1"
+                  stroke="currentColor"
+                  stroke-width="1.7"
+                  stroke-linecap="round"
+                />
+              </svg>
+            </span>
+
+            <h3>In-season</h3>
+
+            <p>
+              Crop scouting, fertility decisions, chemistry,
+              biologicals, fungicide timing, field days, and trial
+              observations.
+            </p>
+          </article>
+
+          <article class="season-card">
+            <span class="season-label">Harvest</span>
+
+            <span class="season-icon">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                aria-hidden="true"
+              >
+                <path
+                  d="M12 21V5M12 8c-3 0-5-2-5-5 3 0 5 2 5 5ZM12 12c3 0 5-2 5-5-3 0-5 2-5 5ZM12 15c-3 0-5-2-5-5 3 0 5 2 5 5ZM12 18c3 0 5-2 5-5-3 0-5 2-5 5Z"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </span>
+
+            <h3>Performance</h3>
+
+            <p>
+              Yield results, plot comparisons, product performance,
+              customer feedback, and lessons for next year.
+            </p>
+          </article>
+
+          <article class="season-card">
+            <span class="season-label">Fall</span>
+
+            <span class="season-icon">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                aria-hidden="true"
+              >
+                <path
+                  d="M4 18l5-5 4 3 7-8"
+                  stroke="currentColor"
+                  stroke-width="1.7"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+
+                <path
+                  d="M16 8h4v4"
+                  stroke="currentColor"
+                  stroke-width="1.7"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </span>
+
+            <h3>Next season</h3>
+
+            <p>
+              Product reviews, bookings, recommendations, acres,
+              programs, follow-ups, and next-year opportunities.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Opportunity examples -->
+    <section class="section section-soft">
+      <div class="container">
+        <div class="example-layout">
+          <div class="example-intro">
+            <p class="eyebrow">Real agronomy opportunities</p>
+
+            <h2>
+              Keep the context behind every recommendation.
+            </h2>
+
+            <p>
+              Scout gives agronomy salespeople a place to remember more
+              than a generic opportunity name and sales stage. It keeps
+              the details that help turn a conversation into a trusted
+              recommendation.
+            </p>
+          </div>
+
+          <div class="example-list">
+            <article class="example-card">
+              <div class="example-header">
+                <h3>Corn hybrid trial</h3>
+                <span class="example-type">Product trial</span>
+              </div>
+
+              <p>
+                Beck Family Farms is trying a new corn hybrid on 120
+                acres. Follow up after emergence, before tasseling, and
+                again after harvest to review performance.
+              </p>
+
+              <div class="example-footer">
+                <span class="example-detail">
+                  Acres: 120
+                </span>
+
+                <span class="example-detail">
+                  Next step: Emergence visit
+                </span>
+
+                <span class="example-detail">
+                  Review: After harvest
+                </span>
+              </div>
+            </article>
+
+            <article class="example-card">
+              <div class="example-header">
+                <h3>Fungicide recommendation</h3>
+                <span class="example-type">In-season</span>
+              </div>
+
+              <p>
+                Johnson Farms wants to evaluate a fungicide application
+                before tasseling. Review crop conditions, disease
+                pressure, application timing, and potential return.
+              </p>
+
+              <div class="example-footer">
+                <span class="example-detail">
+                  Timing: Before tasseling
+                </span>
+
+                <span class="example-detail">
+                  Next step: Field visit
+                </span>
+
+                <span class="example-detail">
+                  Status: Active
+                </span>
+              </div>
+            </article>
+
+            <article class="example-card">
+              <div class="example-header">
+                <h3>Soybean biological trial</h3>
+                <span class="example-type">Performance review</span>
+              </div>
+
+              <p>
+                A biological product was applied to part of the field.
+                Capture observations during the season, then schedule a
+                visit after yield data becomes available.
+              </p>
+
+              <div class="example-footer">
+                <span class="example-detail">
+                  Crop: Soybeans
+                </span>
+
+                <span class="example-detail">
+                  Next step: Harvest review
+                </span>
+
+                <span class="example-detail">
+                  Timing: October
+                </span>
+              </div>
+            </article>
+
+            <article class="example-card">
+              <div class="example-header">
+                <h3>Fall seed booking</h3>
+                <span class="example-type">Booking opportunity</span>
+              </div>
+
+              <p>
+                The grower expects to review seed options after harvest
+                and is comparing three hybrids. The potential
+                opportunity covers approximately 620 corn acres.
+              </p>
+
+              <div class="example-footer">
+                <span class="example-detail">
+                  Potential: 620 acres
+                </span>
+
+                <span class="example-detail">
+                  Follow up: After harvest
+                </span>
+
+                <span class="example-detail">
+                  Products: 3 hybrids
+                </span>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Relationship story -->
+    <section class="section">
+      <div class="container">
+        <div class="relationship-card">
+          <div class="relationship-quote">
+            <blockquote>
+              “Great agronomy sales isn't built by remembering every
+              product number.
+
+              It's built by
+              <span class="hand-underline">
+                remembering people.
+              </span>”
+            </blockquote>
+          </div>
+
+          <div class="relationship-copy">
+            <p>
+              Growers may not expect you to know every answer the moment
+              they ask the question.
+            </p>
+
+            <p>
+              They remember that you called when you said you would.
+              They remember that you stopped by. They remember that you
+              checked the field after emergence and followed up after
+              harvest.
+            </p>
+
+            <p>
+              They remember that you understood their operation instead
+              of treating every acre and every customer exactly the
+              same.
+            </p>
+
+            <p>
+              Scout exists to help agronomy salespeople remember those
+              moments and turn consistency into stronger relationships.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Benefits -->
+    <section class="section section-green">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">Your territory, organized</p>
+
+          <h2>
+            Keep each season connected to the next.
+          </h2>
+
+          <p>
+            Scout helps you build a more consistent way to manage your
+            territory without turning relationship-based selling into
+            another complicated reporting exercise.
+          </p>
+        </div>
+
+        <div class="results-grid">
+          <article class="result-card">
+            <strong>See</strong>
+
+            <h3>Your entire territory</h3>
+
+            <p>
+              Understand your growers, fields, opportunities, visits,
+              trials, and future potential.
+            </p>
+          </article>
+
+          <article class="result-card">
+            <strong>Remember</strong>
+
+            <h3>What each grower told you</h3>
+
+            <p>
+              Keep conversations, recommendations, product interests,
+              and promises connected.
+            </p>
+          </article>
+
+          <article class="result-card">
+            <strong>Plan</strong>
+
+            <h3>The right next step</h3>
+
+            <p>
+              Know who to call, where to stop, what to review, and when
+              to follow up.
+            </p>
+          </article>
+
+          <article class="result-card">
+            <strong>Grow</strong>
+
+            <h3>Long-term relationships</h3>
+
+            <p>
+              Earn trust through better preparation, consistency, and
+              follow-through.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- CRM section -->
+    <section class="section section-soft">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">No, it isn't another CRM</p>
+
+          <h2>
+            Keep the CRM your company already trusts.
+          </h2>
+
+          <p>
+            Scout gives the agronomy salesperson a specialized daily
+            workspace while the CRM continues serving as the company's
+            system of record.
+          </p>
+        </div>
+
+        <div class="crm-card">
+          <div class="crm-copy">
+            <h3>
+              Scout helps connect grower activity to the rest of the
+              business.
+            </h3>
+
+            <p>
+              Use Scout to prepare for visits, capture notes, organize
+              product opportunities, track trials, create follow-ups,
+              and manage seasonal territory activity.
+            </p>
+
+            <p>
+              Your CRM can continue handling company-wide customer
+              records, reporting, forecasting, and leadership
+              visibility.
+            </p>
+
+            <a
+              class="text-link"
+              href="/works-with-your-crm.html"
+              style="margin-top: 7px;"
+            >
+              See how Scout works with your CRM
+              <span aria-hidden="true">→</span>
+            </a>
+          </div>
+
+          <div class="crm-flow">
+            <div class="crm-flow-item">
+              <span class="crm-flow-icon">
+                <svg
+                  width="21"
+                  height="21"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M4 7l5-2 6 2 5-2v12l-5 2-6-2-5 2V7Z"
+                    stroke="currentColor"
+                    stroke-width="1.7"
+                    stroke-linejoin="round"
+                  />
+
+                  <path
+                    d="M9 5v12M15 7v12"
+                    stroke="currentColor"
+                    stroke-width="1.7"
+                  />
+                </svg>
+              </span>
+
+              <div>
+                <strong>Territory activity</strong>
+                <span>
+                  Grower visits, fields, trials, recommendations, and
+                  conversations
+                </span>
+              </div>
+            </div>
+
+            <div class="crm-flow-item scout">
+              <span class="crm-flow-icon">
+                <svg
+                  width="21"
+                  height="21"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M5 18l5-7 3 4 2-3 4 6H5Z"
+                    stroke="currentColor"
+                    stroke-width="1.7"
+                    stroke-linejoin="round"
+                  />
+
+                  <path
+                    d="M14 7v6M14 7h5l-2 2 2 2h-5"
+                    stroke="currentColor"
+                    stroke-width="1.6"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </span>
+
+              <div>
+                <strong>Scout</strong>
+                <span>
+                  The daily workspace for the agronomy salesperson
+                </span>
+              </div>
+            </div>
+
+            <div class="crm-flow-item">
+              <span class="crm-flow-icon">
+                <svg
+                  width="21"
+                  height="21"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  aria-hidden="true"
+                >
+                  <rect
+                    x="4"
+                    y="5"
+                    width="16"
+                    height="14"
+                    rx="3"
+                    stroke="currentColor"
+                    stroke-width="1.7"
+                  />
+
+                  <path
+                    d="M8 10h8M8 14h5"
+                    stroke="currentColor"
+                    stroke-width="1.7"
+                    stroke-linecap="round"
+                  />
+                </svg>
+              </span>
+
+              <div>
+                <strong>Your CRM</strong>
+                <span>
+                  The company-wide system of record and reporting
+                  platform
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quote -->
+    <section class="quote-section">
+      <div class="container">
+        <div class="big-quote">
+          <blockquote>
+            Growers remember consistency.
+
+            <span>
+              Scout helps you deliver it.
+            </span>
+          </blockquote>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section" id="early-access">
+      <div class="container">
+        <div class="cta-card">
+          <div class="cta-copy">
+            <p class="eyebrow">
+              Built for relationships that grow over time
+            </p>
+
+            <h2>
+              Every season starts with relationships.
+
+              <span>
+                Get early access to Scout.
+              </span>
+            </h2>
+
+            <p>
+              Scout is being built for agronomy sales professionals who
+              manage growers, fields, seasonal opportunities, product
+              recommendations, and relationships that carry from one
+              growing season into the next.
+            </p>
+          </div>
+
+          <!-- Change this link to your actual early-access form -->
+          <a class="btn btn-primary" href="/index.html#early-access">
+            Request early access
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="logo" href="/index.html">
+            <span class="logo-mark">
+              <svg
+                width="34"
+                height="34"
+                viewBox="0 0 34 34"
+                fill="none"
+                aria-hidden="true"
+              >
+                <path
+                  d="M4 27l8-11 5 6 4-6 9 11H4z"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linejoin="round"
+                />
+
+                <path
+                  d="M19 7v12M19 7h8l-3 3 3 3h-8"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </span>
+
+            Scout
+          </a>
+
+          <p>Find. Build. <span>Grow.</span></p>
+        </div>
+
+        <div class="footer-column">
+          <h3>Product</h3>
+          <a href="/index.html#features">Features</a>
+          <a href="/works-with-your-crm.html">Works with your CRM</a>
+          <a href="#early-access">Early access</a>
+        </div>
+
+        <div class="footer-column">
+          <h3>Industries</h3>
+
+          <a href="/industries/construction-equipment-sales.html">
+            Construction equipment
+          </a>
+
+          <a href="/industries/agronomy-sales.html">
+            Agronomy sales
+          </a>
+
+          <a href="#">
+            Agricultural equipment
+          </a>
+        </div>
+
+        <div class="footer-column">
+          <h3>Company</h3>
+          <a href="/index.html#story">Why we built Scout</a>
+          <a href="#">Privacy</a>
+          <a href="#">Terms</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const mobileMenuButton =
+      document.getElementById("mobileMenuButton");
+
+    const mobileNav =
+      document.getElementById("mobileNav");
+
+    mobileMenuButton.addEventListener("click", () => {
+      const isOpen = mobileNav.classList.toggle("open");
+
+      mobileMenuButton.setAttribute(
+        "aria-expanded",
+        String(isOpen)
+      );
+    });
+
+    mobileNav.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        mobileNav.classList.remove("open");
+
+        mobileMenuButton.setAttribute(
+          "aria-expanded",
+          "false"
+        );
+      });
+    });
+  </script>
+</body>
+</html>
